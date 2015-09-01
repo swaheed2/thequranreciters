@@ -1,0 +1,54 @@
+RewriteEngine on 
+
+
+DirectoryIndex home.php  
+
+<Files ~ "^\.(htaccess|htpasswd)$">
+deny from all
+</Files>
+Options Indexes
+
+   
+order deny,allow
+
+ErrorDocument 403 http://thequranreciters.com/home.php
+ErrorDocument 404 http://thequranreciters.com/home.php
+
+Options -Indexes
+Options -MultiViews
+# For security reasons, Option followsymlinks cannot be overridden.
+#Options +FollowSymlinks
+Options +SymLinksIfOwnerMatch
+
+
+##############
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+(.+?)\.html[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L,NE] 
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+RewriteRule ^(.+?)/?$ /$1.html [L]
+#################
+RewriteCond %{REQUEST_METHOD} =POST
+RewriteRule ^ - [L] 
+
+RewriteCond %{REQUEST_URI} !^/login/.*$	
+
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+(.+?)\.php[\s?] [NC] 
+ 
+RewriteRule ^ /%1 [R=301,L,NE] 
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{DOCUMENT_ROOT}/$1.php -f
+RewriteRule ^(.+?)/?$ /$1.php [L]
+
+#################
+
+AddType audio/aac .aac
+AddType audio/mp4 .mp4 .m4a
+AddType audio/mpeg .mp1 .mp2 .mp3 .mpg .mpeg
+AddType audio/ogg .oga .ogg
+AddType audio/wav .wav
+AddType audio/webm .webm
+
+#---------------------------------------------------
