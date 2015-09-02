@@ -1,9 +1,5 @@
 <?php  
-	$path = $_SERVER['DOCUMENT_ROOT']; 
-	     
-	define('FACEBOOK_SDK_V4_SRC_DIR', __DIR__ . '/../Facebook/');
-	require_once  ( __DIR__ . '/../Facebook/autoload.php' );	
- 
+	$path = $_SERVER['DOCUMENT_ROOT'];  
 	 
 	include $path. '/pages/reciters.php'; 
 	include $path. '/pages/mujawwad.php'; 
@@ -17,16 +13,7 @@
 	include $path . '/pages/search-function.php';
 	
 		
-	$fb = new Facebook\Facebook ([
-	  'app_id' => '399299573601013',
-	  'app_secret' => '1af7b3b28744ef1aadb432adf5515c79',
-	  'default_graph_version' => 'v2.4',
-	]);
-
-	$helper = $fb->getRedirectLoginHelper(); 
-	$permissions = ['email']; // Optional permissions
-	$loginUrl = $helper->getLoginUrl('http://www.thequranreciters.com/Facebook/fb-callback', $permissions);
-
+	 
 ?>
 
 	
