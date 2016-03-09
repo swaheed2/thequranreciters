@@ -1,0 +1,9 @@
+[10-Aug-2015 01:32:39] /home4/ahqiplan/public_html/thequranreciters/login/
+[10-Aug-2015 01:32:40] /home4/ahqiplan/public_html/thequranreciters/login/
+[10-Aug-2015 01:32:43] /home4/ahqiplan/public_html/thequranreciters/login/
+[11-Aug-2015 05:05:43] PHP Warning:  mysqli_connect() [<a href='function.mysqli-connect'>function.mysqli-connect</a>]: (28000/1045): Access denied for user 'ahqiplan'@'localhost' (using password: YES) in /home4/ahqiplan/public_html/thequranreciters/login/lib/class_db.php on line 87
+[11-Aug-2015 05:05:43] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, boolean given in /home4/ahqiplan/public_html/thequranreciters/login/lib/class_db.php on line 430
+[11-Aug-2015 05:05:43] PHP Warning:  mysqli_errno() expects parameter 1 to be mysqli, boolean given in /home4/ahqiplan/public_html/thequranreciters/login/lib/class_db.php on line 431
+[11-Aug-2015 05:05:46] PHP Warning:  mysqli_connect() [<a href='function.mysqli-connect'>function.mysqli-connect</a>]: (28000/1045): Access denied for user 'ahqiplan'@'localhost' (using password: YES) in /home4/ahqiplan/public_html/thequranreciters/login/lib/class_db.php on line 87
+[11-Aug-2015 05:05:46] PHP Warning:  mysqli_error() expects parameter 1 to be mysqli, boolean given in /home4/ahqiplan/public_html/thequranreciters/login/lib/class_db.php on line 430
+[11-Aug-2015 05:05:46] PHP Warning:  mysqli_errno() expects parameter 1 to be mysqli, boolean given in /home4/ahqiplan/public_html/thequranreciters/login/lib/class_db.php on line 431
