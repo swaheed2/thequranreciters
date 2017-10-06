@@ -2,6 +2,8 @@
 
 http://thequranreciters.com
 
+V1 branch contains the php web app
+
 ## Table of Contents
 
 - [Available Scripts](#available-scripts)
