@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Route} from 'react-router-dom'
+import Home from './containers/Home'
+import Reciters from './containers/Reciters'
+import Contact from './containers/Contact'
+import Submission from './containers/Submission'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
-}
+
+
+const App = () => ( 
+  <Router>
+    <div>
+      <Route exact path= '/' component={Home} />
+      <Route path= '/reciters' render = {()=> (<h2>Reciters</h2>)} />
+      <Route path= '/reciters/:reciter' render = {(props)=> (<h2>Reciter # {props.match.params.reciter}</h2>)} />
+      <Route path= '/contact' render = {()=> (<h2>Contact</h2>)} />
+      <Route path= '/submission' render = {()=> (<h2>Submission</h2>)} />
+    </div>
+  </Router>
+)
 
 export default App;
