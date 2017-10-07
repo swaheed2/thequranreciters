@@ -14,3 +14,15 @@ export function fetchAllReciters() {
 		})
 	}
 }
+export function reduceList(word) {
+	return(dispatch) => {
+		axios
+		.get('http://thequranreciters.com/database/reciters-list')
+		.then((response) => {
+			const newArray = response.data.filter(obj => {
+				return obj.name.toLowerCase().includes(word)
+			})
+			dispatch(showReciters(newArray))
+		})
+	}
+}
