@@ -13,7 +13,7 @@ const App = () => (
   <Router>
     <div>
       <Route exact path= '/' component={Home} />
-      <Route path= '/reciters' render = {()=> (<h2>Reciters</h2>)} />
+      <Route path= '/reciters' component={Reciters} />
       <Route path= '/reciters/:reciter' render = {(props)=> (<h2>Reciter # {props.match.params.reciter}</h2>)} />
       <Route path= '/contact' render = {()=> (<h2>Contact</h2>)} />
       <Route path= '/submission' render = {()=> (<h2>Submission</h2>)} />

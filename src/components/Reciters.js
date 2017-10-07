@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Home extends Component {
+class Reciters extends Component {
 	constructor(props) {
 		super(props)
 	}
@@ -8,11 +8,11 @@ class Home extends Component {
 		this.props.fetchAllReciters()
 	}
 	render() {
-		console.log(this.props.showReciters)
+		console.log(this.props)
 		return(
-			<div>Home</div>
+			<div>Reciters</div>
 		)
 	}
 }
 
-export default Home
+export default Reciters

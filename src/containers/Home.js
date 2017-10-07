@@ -6,7 +6,7 @@ import { fetchAllReciters } from '../actions/'
 
 const mapStateToProps = (state) => {
 	return {
-		showReciters: state.showReciters
+		showReciters: state.HomeReducer.showReciters
 	}
 }
 
