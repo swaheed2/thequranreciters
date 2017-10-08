@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField'
+import RecitersList from './RecitersList'
+import ReciterCard from './ReciterCard'
 
 class Reciters extends Component {
 	constructor(props) {
@@ -14,18 +16,15 @@ class Reciters extends Component {
 		this.props.filterList(event.target.value.toLowerCase())
 	}
 	render() {
-
-		const recitersList = (this.props.showReciters) ? 
-			this.props.showReciters.map(reciter => <li key={reciter.id}>{reciter.name}</li>) 
-			: null
+		// const recitersList = (this.props.showReciters) ? this.props.showReciters.map(reciter => <li key={reciter.id}>{reciter.name}</li>) : null
+		const recitersList = this.props.showReciters ? this.props.showReciters : null
+		const sampleReciter = (recitersList) ? recitersList[0] : null;
+		console.log(recitersList, 'reciters list')
 		return (
 			<div>
-
 				<TextField onChange={this.handleChange}/>
 				<h3 style={{textAlign: 'center'}}>Reciters</h3>
-				<ul style={{textAlign: 'center', listStyle: 'none'}}>
-					{recitersList}
-				</ul>
+				<RecitersList list={recitersList} />
 			</div>
 
 		)
