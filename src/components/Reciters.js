@@ -3,6 +3,8 @@ import TextField from 'material-ui/TextField'
 import RecitersList from './RecitersList'
 import ReciterCard from './ReciterCard'
 
+import SearchBar from 'material-ui-search-bar'
+
 class Reciters extends Component {
 	constructor(props) {
 		super(props)
@@ -11,9 +13,9 @@ class Reciters extends Component {
 	componentDidMount() {
 		this.props.fetchAllReciters()
 	}
-	handleChange(event) {
-		console.log(event)
-		this.props.filterList(event.target.value.toLowerCase())
+	handleChange(value) {
+		
+		this.props.filterList(value.toLowerCase())
 	}
 	render() {
 		// const recitersList = (this.props.showReciters) ? this.props.showReciters.map(reciter => <li key={reciter.id}>{reciter.name}</li>) : null
@@ -22,9 +24,9 @@ class Reciters extends Component {
 		console.log(recitersList, 'reciters list')
 		return (
 			<div>
-				<TextField onChange={this.handleChange}/>
 				<h3 style={{textAlign: 'center'}}>Reciters</h3>
-				<RecitersList list={recitersList} />
+				<SearchBar onChange={this.handleChange} style={{marginBottom: 13, marginLeft: 5, marginRight: 5}}/>
+				<RecitersList list={recitersList} style={{marginTop: 20}}/>
 			</div>
 
 		)
