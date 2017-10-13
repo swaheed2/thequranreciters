@@ -1,5 +1,22 @@
 import React, { Component } from 'react';
 import Paper from 'material-ui/Paper'
+import { withStyles } from 'material-ui/styles'
+
+const styles = theme => ({
+		cardStyle: {
+	  		minHeight:110, 
+				overflow: 'hidden',
+	  		width: 180,
+	  		margin: 20,
+	  		cursor: 'pointer',
+	  		transition: `all 0.1s ease`,
+	  		'&:hover': {
+					transform: `scale(1.1)`,
+					transition: `all 0.1s ease`
+				}
+  	}
+})
+
 
 class ReciterCard extends Component {
 	constructor(props) {
@@ -10,27 +27,19 @@ class ReciterCard extends Component {
 	}
 
 	render() {
-		const cardStyle = {
-  		minHeight:110, 
-			overflow: 'hidden',
-  		width: 180,
-  		margin: 20,
-  		cursor: 'pointer',
-  		transform: `scale(${this.state.transform})`
-		};
 		const {
-			children
+			children,
+			classes
 		} = this.props
+		console.log(classes)
 		return (
 			<div style={{minWidth: '20%'}}>
 				<Paper 
-					style={cardStyle}
+					className={classes.cardStyle}
 					zDepth={2} 
 					transitionEnabled={true}
-					onMouseOver={() => {this.setState({transform: 1.1})}}
-					onMouseOut={() => {this.setState({transform: 1.0})}}
 				>
-					<img  style={{width: 180}}src="http://thequranreciters.com/reciters/images/abdul-bari-al-thubaiti.jpg" />
+					<img  style={{width: 180}}src="https://cdn.auth0.com/blog/react-js/react.png"/>
 					<div> {(this.props.reciter) ?
 						 <span style={{fontWeight: 400, fontSize: '18px'}}>
 								{this.props.reciter.name}
@@ -42,4 +51,4 @@ class ReciterCard extends Component {
 	}
 }
 
-export default ReciterCard
+export default withStyles(styles)(ReciterCard)
