@@ -6,13 +6,16 @@ import Home from './containers/Home'
 import Reciters from './containers/Reciters'
 import Contact from './containers/Contact'
 import Submission from './containers/Submission'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+const theme = createMuiTheme();
 
 
 
-const App = () => ( 
+const App = () => {
+console.log(theme)
+  return(
   <Router>
-  	<MuiThemeProvider>
+  	<MuiThemeProvider theme={theme}>
 	    <div>
 	      <Route exact path= '/' component={Home} />
 	      <Route path= '/reciters' component={Reciters} />
@@ -22,6 +25,6 @@ const App = () => (
 	    </div>
     </MuiThemeProvider>
   </Router>
-)
+)}
 
 export default App;
