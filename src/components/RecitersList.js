@@ -8,17 +8,10 @@ const styles = theme => ({
 	containerStyle: {
   	display: 'flex',
   	padding: '18px',
-  	justifyContent: 'space-around',
+  	justifyContent: 'center',
   	flexWrap: 'wrap',
   	minWidth: '280px',
-  	backgroundColor: purple[300],
-  	'@media (min-width: 1054px)': {
-	    '&:after': {
-	  		content: '""',
-	  		width: '10em',
-	  		flex: 'auto'
-			}
-  	}
+  	backgroundColor: purple[300]
   }
 })
 const RecitersList = (props) => {

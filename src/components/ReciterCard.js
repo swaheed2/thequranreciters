@@ -8,8 +8,6 @@ const styles = theme => ({
 	  		width: 220,
 	  		cursor: 'pointer',
 	  		transition: `all 0.1s ease`,
-	  		overflow:'hidden',
-	  		display: 'block',
 	  		margin: '8px',
 	  		minHeight: '268px',
 	  		'&:hover': {
@@ -43,7 +41,7 @@ class ReciterCard extends Component {
 		
 		return (
 			
-			<div  style={{margin: '11px'}}>
+			<div  style={{margin: '1em'}}>
 				<Paper 
 					className={classes.cardStyle}
 					zDepth={3} 
