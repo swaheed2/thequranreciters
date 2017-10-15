@@ -5,15 +5,15 @@ import { withStyles } from 'material-ui/styles'
 
 const styles = theme => ({
 		cardStyle: {
-	  		width: 220,
-	  		cursor: 'pointer',
-	  		transition: `all 0.1s ease`,
-	  		margin: '8px',
-	  		minHeight: '268px',
-	  		'&:hover': {
-					transform: `scale(1.1)`,
-					transition: `all 0.1s ease`
-				},
+  		width: 220,
+  		cursor: 'pointer',
+  		transition: `all 0.1s ease`,
+  		margin: '8px',
+  		minHeight: '268px',
+  		'&:hover': {
+				transform: `scale(1.1)`,
+				transition: `all 0.1s ease`
+			},
   	},
 		cardTextHolder: {
 			backgroundColor: 'white',
@@ -41,25 +41,22 @@ class ReciterCard extends Component {
 		
 		return (
 			
-			<div  style={{margin: '1em'}}>
+			<div  style={{margin: '1em', border: 'black'}}>
 				<Paper 
 					className={classes.cardStyle}
 					zDepth={3} 
 					transitionEnabled={true}
 				>
-					<div>
-						<img style={{width: '100%'}}src="http://thequranreciters.com/reciters/images/abdul-bari-al-thubaiti.jpg"></img>
-						
-					</div>
-					<div className={classes.cardTextHolder}> {(this.props.reciter) ?
-						 <Typography style={{textAlign: 'center', fontWeight: 600}} type="subheading">
-								{this.props.reciter.name}
-							</Typography>: null}
-					</div>
+						<div>
+							<img style={{width: '100%'}}src="http://thequranreciters.com/reciters/images/mishary-alafasy.jpg"></img>
+						</div>
+						<div className={classes.cardTextHolder}> {(this.props.reciter) ?
+							 <Typography style={{textAlign: 'center', fontWeight: 600}} type="subheading">
+									{this.props.reciter.name}
+								</Typography>: null}
+						</div>
 				</Paper>
-				
-				</div>
-			
+			</div>
 		)
 	}
 }

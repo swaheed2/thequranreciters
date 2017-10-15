@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import TextField from 'material-ui/TextField'
 import RecitersList from './RecitersList'
 import ReciterCard from './ReciterCard'
-
+import SearchBar from './SearchBar'
 
 class Reciters extends Component {
 	constructor(props) {
@@ -13,7 +13,6 @@ class Reciters extends Component {
 		this.props.fetchAllReciters()
 	}
 	handleChange(event) {
-		
 		this.props.filterList(event.target.value.toLowerCase())
 	}
 	render() {
@@ -24,7 +23,7 @@ class Reciters extends Component {
 		return (
 			<div>
 				<h3 style={{textAlign: 'center'}}>Reciters</h3>
-				<input onChange={this.handleChange} style={{marginBottom: 13, marginLeft: 5, marginRight: 5}}/>
+				<SearchBar onChange={this.handleChange}/>
 				<RecitersList list={recitersList} style={{marginTop: 20}}/>
 			</div>
 
