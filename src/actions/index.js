@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { fetchReciters } from '../config/development.g'
 
 export const showReciters = (list) => ({
   type: 'SHOW_RECITERS',
@@ -8,7 +9,7 @@ export const showReciters = (list) => ({
 export function fetchAllReciters() {
 	return(dispatch) => {
 		axios
-		.get('http://thequranreciters.com/database/reciters-list')
+		.get(fetchReciters)
 		.then((response) => {
 			dispatch(showReciters(response.data))
 		})
@@ -17,7 +18,7 @@ export function fetchAllReciters() {
 export function reduceList(word) {
 	return(dispatch) => {
 		axios
-		.get('http://thequranreciters.com/database/reciters-list')
+		.get(fetchReciters)
 		.then((response) => {
 			const newArray = response.data.filter(obj => {
 				return obj.name.toLowerCase().includes(word)

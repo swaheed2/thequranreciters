@@ -7,10 +7,8 @@ import { red, purple } from 'material-ui/colors';
 const styles = theme => ({
 	containerStyle: {	
 		 display: 'flex',
-		 // alignContent: 'flex-start',
 	   flexWrap: 'wrap',
 		 backgroundColor: 'white',
-		 // flexFlow: 'row wrap',
 		 justifyContent: 'space-around',
 		 '&:after': {
 		 		content: "''",
