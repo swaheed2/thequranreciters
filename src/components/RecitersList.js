@@ -5,14 +5,21 @@ import { withStyles } from 'material-ui/styles'
 import { red, purple } from 'material-ui/colors';
 
 const styles = theme => ({
-	containerStyle: {
-  	display: 'flex',
-  	padding: '18px',
-  	justifyContent: 'center',
-  	flexWrap: 'wrap',
-  	minWidth: '280px',
-  	backgroundColor: purple[300]
-  }
+	containerStyle: {	
+		 display: 'flex',
+		 // alignContent: 'flex-start',
+	   flexWrap: 'wrap',
+		 backgroundColor: 'white',
+		 // flexFlow: 'row wrap',
+		 justifyContent: 'space-around',
+		 '&:after': {
+		 		content: "''",
+		 		width: '59%'
+		 }
+	}
+		 
+		
+  
 })
 const RecitersList = (props) => {
 console.log(props.classes)

@@ -2,24 +2,40 @@ import React, { Component } from 'react';
 import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography';
 import { withStyles } from 'material-ui/styles'
+import { grey } from 'material-ui/colors';
 
 const styles = theme => ({
 		cardStyle: {
-  		width: 220,
+  		width: '100%',
   		cursor: 'pointer',
   		transition: `all 0.1s ease`,
-  		margin: '8px',
-  		minHeight: '268px',
-  		'&:hover': {
-				transform: `scale(1.1)`,
-				transition: `all 0.1s ease`
-			},
+ 		minHeight: '250px',
+ 		backgroundColor: grey[100], 
+ 		'&:hover': {
+ 			opacity: 0.8,
+ 			transition: `all 0.2s ease`
+ 		}
+  		
   	},
 		cardTextHolder: {
-			backgroundColor: 'white',
+			backgroundColor: grey[100],
 			margin: '0 auto',
 			width: '180px',
-			minHeight: '34px'
+			minHeight: '60px'
+		}, 
+		cardHolderStyle: {
+			display:'inline-block', 
+			width:'18%',
+			minWidth: '150px',
+			margin: '5px', 
+			verticalAlign:'top',
+			'@media (max-width: 900px)': {
+				display:'inline-block', 
+				width:'25%',
+				minWidth: '150px',
+				margin: '5px', 
+				verticalAlign:'top',
+    },
 		}
 })
 
@@ -28,7 +44,7 @@ class ReciterCard extends Component {
 	constructor(props) {
 		super(props)	
 		this.state = {
-			transform: 1.0
+			opacity: 1
 		}
 	}
 
@@ -41,17 +57,19 @@ class ReciterCard extends Component {
 		
 		return (
 			
-			<div  style={{margin: '1em', border: 'black'}}>
+			<div
+				
+				style={{minWidth: '280px', paddingTop: '5px', paddingBottom: '5px',  verticalAlign:'top'}}>
 				<Paper 
 					className={classes.cardStyle}
 					zDepth={3} 
 					transitionEnabled={true}
 				>
-						<div>
+						<div style={{minHeight: '100px'}}>
 							<img style={{width: '100%'}}src="http://thequranreciters.com/reciters/images/mishary-alafasy.jpg"></img>
 						</div>
 						<div className={classes.cardTextHolder}> {(this.props.reciter) ?
-							 <Typography style={{textAlign: 'center', fontWeight: 600}} type="subheading">
+							 <Typography style={{textAlign: 'center', fontWeight: 300, marginTop: '4px' }} type="subheading">
 									{this.props.reciter.name}
 								</Typography>: null}
 						</div>
