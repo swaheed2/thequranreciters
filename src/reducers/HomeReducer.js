@@ -1,16 +1,10 @@
 
 const initialState = {
-  showReciters: null
+  recitersList: null
 }
 
 const HomeReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'SHOW_RECITERS':
-      return {
-      	...state,
-      	showReciters: action.data
-      }
-
     default:
       return state
   }

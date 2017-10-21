@@ -1,19 +1,18 @@
 import {connect} from 'react-redux'
 import { withRouter } from 'react-router'
 import Home from '../components/Home'
-import HomeReducer from '../reducers/HomeReducer'
-import { fetchAllReciters } from '../actions/'
+import { fetchReciters } from '../actions/'
 
 const mapStateToProps = (state) => {
 	return {
-		showReciters: state.HomeReducer.showReciters
+		recitersList: state.HomeReducer.recitersList
 	}
 }
 
 const mapDispatchToProps = { 
-	fetchAllReciters: (message) => {
+	fetchReciters: (message) => {
 		return (dispatch) => {
-			dispatch(fetchAllReciters(message))
+			dispatch(fetchReciters(message))
 		}
 	}
 }
