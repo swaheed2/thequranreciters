@@ -57,21 +57,20 @@ class Reciters extends Component {
     		</div>
 				<div style={{
 					backgroundColor: teal[800],
-				 	minHeight: '400px',
-				 	display: 'flex',
-				 	justifyContent: 'center',
+				 	minHeight: '380px',
 				 	paddingTop: '18px'
 				 }} >
 				 	<div>
-						<div style={{margin: 0, height: '300px'}}>
+						<div style={{margin: 0,textAlign:'center', height: '300px'}}>
 							<img  src="https://assets-1f14.kxcdn.com/images/logo-lg-w.png" style={{height:200, width:400}} />
-							<div style={{fontWeight: 500, fontSize: '18px', color: 'rgb(155, 202, 196)',marginLeft: '128px', marginTop: '12px'}}>The Quran Reciters</div>
-						</div>
-						<div>
-							<SearchBar onChange={this.handleChange}/>
+							<div style={{fontWeight: 500, fontSize: '18px', color: 'rgb(155, 202, 196)', marginTop: '12px'}}>The Quran Reciters</div>
+							<div style={{marginTop: '32px'}}>
+								<SearchBar style={{margin:"0 auto", width: '400px'}} onChange={this.handleChange}/>
+							</div>
 						</div>
 					</div>
 				</div>
+			
 				<RecitersList list={recitersList} style={{marginTop: 20}}/>
 			</div>
 
