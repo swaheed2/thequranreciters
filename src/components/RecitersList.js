@@ -8,12 +8,7 @@ const styles = theme => ({
 	containerStyle: {	
 		 display: 'flex',
 	   flexWrap: 'wrap',
-		 backgroundColor: 'white',
-		 justifyContent: 'space-around',
-		 '&:after': {
-		 		content: "''",
-		 		width: '59%'
-		 }
+		 backgroundColor: 'white'
 	}
 		 
 		
@@ -27,7 +22,7 @@ console.log(props.classes)
 		</div>
 	)
 	return(
-		<Paper zDepth={2} >
+		<Paper zDepth={2} style={{padding: '15px'}}>
 				{renderList()}
 		</Paper>
 	)

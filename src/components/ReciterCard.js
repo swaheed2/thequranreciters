@@ -12,7 +12,7 @@ const styles = theme => ({
  		minHeight: '250px',
  		backgroundColor: grey[100], 
  		'&:hover': {
- 			opacity: 0.8,
+ 			filter:'brightness(120%)',
  			transition: `all 0.2s ease`
  		}
   		
@@ -29,13 +29,32 @@ const styles = theme => ({
 			minWidth: '150px',
 			margin: '5px', 
 			verticalAlign:'top',
-			'@media (max-width: 900px)': {
-				display:'inline-block', 
-				width:'25%',
-				minWidth: '150px',
-				margin: '5px', 
-				verticalAlign:'top',
-    },
+		},
+		cardReciter: {
+			
+			boxSizing: 'border-box',
+			padding: '7px',
+			'@media all and (max-width: 1690px)':
+			 { 
+			 		width:'20%'
+			 },
+			'@media all and (max-width: 1280px)': 
+				{
+					width: '20%'
+				},
+			'@media all and (max-width: 980px)': 
+				{
+					width: '33.33%'
+				},
+			'@media all and (max-width: 736px)': 
+				{
+					width: '50%'
+				},
+			'@media all and (max-width: 736px)': 
+				{
+					width: '50%'
+				}
+
 		}
 })
 
@@ -54,19 +73,19 @@ class ReciterCard extends Component {
 			theme,
 			classes
 		} = this.props
-		
+		console.log(this.props.reciter, 'reciter')
 		return (
 			
 			<div
-				
-				style={{minWidth: '280px', paddingTop: '5px', paddingBottom: '5px',  verticalAlign:'top'}}>
+				className={classes.cardReciter}
+				>
 				<Paper 
 					className={classes.cardStyle}
 					zDepth={3} 
 					transitionEnabled={true}
 				>
-						<div style={{minHeight: '100px'}}>
-							<img style={{width: '100%'}}src="http://thequranreciters.com/reciters/images/mishary-alafasy.jpg"></img>
+						<div style={{height: '220px', overflow: 'hidden'}}>
+							<img style={{minHeight: '100%', minWidth: '100%'}} src={`http://thequranreciters.com/reciters/images/lg/${this.props.reciter.id}-lg.jpg`}></img>
 						</div>
 						<div className={classes.cardTextHolder}> {(this.props.reciter) ?
 							 <Typography style={{textAlign: 'center', fontWeight: 300, marginTop: '4px' }} type="subheading">
