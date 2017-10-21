@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 
 class Home extends Component {
-	constructor(props) {
-		super(props)
-	}
 	componentDidMount() {
-		this.props.fetchAllReciters()
+		this.props.fetchReciters()
 	}
 	render() {
-		console.log(this.props.showReciters)
+		console.log(this.props.recitersList)
 		return(
 			<div>Home</div>
 		)

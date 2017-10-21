@@ -1,11 +1,8 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route} from 'react-router-dom'
 import Home from './containers/Home'
 import Reciters from './containers/Reciters'
-import Contact from './containers/Contact'
-import Submission from './containers/Submission'
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 const theme = createMuiTheme();
 
