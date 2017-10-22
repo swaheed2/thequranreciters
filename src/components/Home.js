@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
+import AudioPlayer from './AudioPlayer';
 
 class Home extends Component {
 	componentDidMount() {
-		this.props.fetchReciters()
 	}
 	render() {
-		console.log(this.props.recitersList)
-		return(
-			<div>Home</div>
+		return (
+			<div>Home
+
+				<AudioPlayer></AudioPlayer>
+			</div>
+			
 		)
 	}
 }
