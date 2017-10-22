@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
+<<<<<<< HEAD
 import { BrowserRouter as Router, Route, Redirect} from 'react-router-dom'
 import Home from './containers/Home'
 import Reciters from './containers/Reciters'
@@ -9,6 +10,22 @@ import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
 
 const theme = createMuiTheme();
+=======
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import Home from './containers/Home'
+import Reciters from './containers/Reciters'
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+import { teal, green, red } from 'material-ui/colors';
+
+const theme = createMuiTheme({
+	palette: {
+		primary: teal,
+		secondary: green,
+		error: red
+	},
+	primary: teal[800]
+});
+>>>>>>> aaf2e59d0576b8b8c09d27819dd6f8b2a8df66c2
 
 const fakeAuth = {
   isAuthenticated: false,
@@ -91,6 +108,7 @@ class Login extends Component {
 }
 
 const App = () => {
+
 console.log(theme)
   return(
   <Router>
@@ -107,5 +125,6 @@ console.log(theme)
     </MuiThemeProvider>
   </Router>
 )}
+
 
 export default App;
