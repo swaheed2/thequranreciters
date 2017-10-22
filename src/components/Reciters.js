@@ -23,6 +23,7 @@ const styles = theme => ({
 	    marginRight: 20,
 	  },
 	  imgStyle: {
+	  	
 	  	'@media all and (max-width: 1690px )':
 			 { 
 			 		height:'200px',
