@@ -49,12 +49,7 @@ const styles = theme => ({
 			'@media all and (max-width: 736px)': 
 				{
 					width: '50%'
-				},
-			'@media all and (max-width: 736px)': 
-				{
-					width: '50%'
 				}
-
 		}
 })
 

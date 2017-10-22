@@ -21,6 +21,18 @@ const styles = theme => ({
 	  menuButton: {
 	    marginLeft: -12,
 	    marginRight: 20,
+	  },
+	  imgStyle: {
+	  	'@media all and (max-width: 1690px )':
+			 { 
+			 		height:'200px',
+			 		width:'400px'
+			 },
+			'@media all and (max-width: 736px)': 
+				{
+					height:'180px',
+			 		width:'300px'
+				}
 	  }
 	})
 
@@ -62,7 +74,7 @@ class Reciters extends Component {
 				 }} >
 				 	<div>
 						<div style={{margin: 0,textAlign:'center', height: '300px'}}>
-							<img  src="https://assets-1f14.kxcdn.com/images/logo-lg-w.png" style={{height:200, width:400}} />
+							<img  src="https://assets-1f14.kxcdn.com/images/logo-lg-w.png" className={classes.imgStyle}/>
 							<div style={{fontWeight: 500, fontSize: '18px', color: 'rgb(155, 202, 196)', marginTop: '12px'}}>The Quran Reciters</div>
 							<div style={{marginTop: '32px'}}>
 								<SearchBar style={{margin:"0 auto", width: '400px'}} onChange={this.handleChange}/>
