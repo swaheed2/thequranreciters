@@ -4,7 +4,13 @@ import { teal } from 'material-ui/colors';
 import Button from 'material-ui/Button'
 
 class AddReciters extends Component {
-	
+	constructor(props) {
+		super(props)
+		 this.submitReciter = this.submitReciter.bind(this)
+	}
+	submitReciter(values) {
+		this.props.addReciter(values)
+	}
 	render() {
 		 const { handleSubmit, pristine, reset, submitting } = this.props
 		console.log(this.props.recitersList)
@@ -17,7 +23,7 @@ class AddReciters extends Component {
 					</div>
 				</div>
 				<div style={{backgroundColor: teal[300]}}>
-				    <form onSubmit={handleSubmit} style={{marginLeft: '11px', paddingTop: '11px'}}>
+				    <form onSubmit={handleSubmit(this.submitReciter)} style={{marginLeft: '11px', paddingTop: '11px'}}>
 				      <div style={{display: 'flex', marginBottom: '11px'}}>
 				        <div style={{width: '130px'}}><label style={{color: 'white', marginRight: '11px'}}>Id</label></div>
 				        <div>

@@ -58,13 +58,11 @@ class Login extends Component {
   	handleSubmit = (event) => {
   		event.preventDefault()
   		console.log(event.target.value)
-  		if(this.state.value == 'quranreciters'){
+  		
   			fakeAuth.authenticate(() => {
 	      	this.setState({ redirectToReferrer: true })
 	    	}) 
-  		} else {
-  				this.setState({error: true})
-	    	}
+  		
   	}	
 
 	render() {
