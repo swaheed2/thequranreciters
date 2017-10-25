@@ -3,24 +3,21 @@ import axios from 'axios';
 import { API_URL, RECITERS_ACTION_TYPES } from '../config'
 import { SamplePosting } from './sample'
 
-export const addReciter = (reciterDetail) => ({
-	type: 'ADD_RECITER',
-	data: reciterDetail
-})
-
-export function AddReciter(details) {
+export function uploadReciter(details) {
 	return (dispatch) => {
-		console.log(details)
-		axios.post('http://rest.learncode.academy/api/johnbob/friends', {details})
-		.then(function(response) {
-			dispatch(addReciter(response.data))
-		})
+		axios.post('http://rest.learncode.academy/api/johnbob/friends', { details })
+			.then(function (response) {
+				dispatch({
+					type: 'ADD_RECITER',
+					data: response.data
+				})
+			})
 	}
 }
 
 export function fetchReciters(name) {
 	let url = API_URL + '/reciters-list'
-
+	console.log('action fetch')
     /**
      * TODO
 	 * // we should filter in backend
@@ -28,8 +25,6 @@ export function fetchReciters(name) {
      *  url += `?name=${name}`
      * }
      */
-
-	const typePrefix = 'RECITERS_';
 	return async (dispatch) => {
 		try {
 			const res = await http.get(url);
@@ -48,9 +43,9 @@ export function fetchReciters(name) {
 			dispatch({ type: action, data: list })
 
 		} catch (err) {
-			dispatch({ 
-				type: RECITERS_ACTION_TYPES.RECITERS_REJECTED, 
-				data: err 
+			dispatch({
+				type: RECITERS_ACTION_TYPES.RECITERS_REJECTED,
+				data: err
 			})
 		}
 	}

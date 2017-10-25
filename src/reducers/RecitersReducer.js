@@ -3,7 +3,7 @@ const initialState = {
   recitersList: null
 }
 
-const ReciterReducer = (state = initialState, action) => {
+const RecitersReducer = (state = initialState, action) => {
 
   const newState = { ...state };
 
@@ -21,5 +21,5 @@ const ReciterReducer = (state = initialState, action) => {
   return newState;
 }
 
-export default ReciterReducer
+export default RecitersReducer
 

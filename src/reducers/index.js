@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
 import HomeReducer from './HomeReducer'
-import ReciterReducer from './ReciterReducer'
+import RecitersReducer from './RecitersReducer'
 import { reducer as formReducer } from 'redux-form';
 
 const quranRecitersReducers = combineReducers({
   HomeReducer,
-  ReciterReducer,
+  RecitersReducer,
   form: formReducer
 })
 

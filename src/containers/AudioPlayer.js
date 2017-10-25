@@ -7,4 +7,4 @@ const mapStateToProps = (state) => {
 		
 	}
 }
-export default connect(mapStateToProps)(Home)
+export default connect(mapStateToProps)(AudioPlayer)

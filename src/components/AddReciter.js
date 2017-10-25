@@ -3,13 +3,13 @@ import { Field, FieldArray, reduxForm, formValueSelector } from "redux-form"
 import { teal } from 'material-ui/colors';
 import Button from 'material-ui/Button'
 
-class AddReciters extends Component {
+class AddReciter extends Component {
 	constructor(props) {
 		super(props)
 		 this.submitReciter = this.submitReciter.bind(this)
 	}
 	submitReciter(values) {
-		this.props.addReciter(values)
+		this.props.uploadReciter(values)
 	}
 	render() {
 		 const { handleSubmit, pristine, reset, submitting } = this.props
@@ -121,4 +121,4 @@ class AddReciters extends Component {
 	}
 }
 
-export default AddReciters
+export default AddReciter

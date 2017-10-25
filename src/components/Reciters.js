@@ -50,6 +50,7 @@ class Reciters extends Component {
 		this.handleChange = this.handleChange.bind(this);
 	}
 	componentDidMount() {
+		console.log('fetching');
 		this.props.fetchReciters()
 	}
 	handleChange(event) {

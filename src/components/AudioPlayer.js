@@ -16,7 +16,7 @@ const styles = theme => {
 			bottom: '0',
 			background: theme.primary,
 			width: '100%'
-		}, 
+		},
 		flex: {
 			color: 'white'
 		}
@@ -41,7 +41,7 @@ class AudioPlayer extends Component {
 			<Toolbar className={cls.audioPlayer}>
 				<IconButton onClick={this.play}
 					className={cls.menuButton} aria-label="Play">
-					<PlayArrow style={{color: 'white'}}/>
+					<PlayArrow style={{ color: 'white' }} />
 				</IconButton>
 				<Typography type="title" className={cls.flex}>
 					An-Nahl

@@ -1,8 +1,8 @@
 import {connect} from 'react-redux'
 import { withRouter } from 'react-router'
-import AddReciters from '../components/AddReciters'
+import AddReciter from '../components/AddReciter'
 import { Field, reduxForm } from 'redux-form'
-import { AddReciter } from '../actions'
+import { uploadReciter } from '../actions'
 
 const mapStateToProps = (state) => {
 	return {
@@ -11,12 +11,12 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = { 
-	addReciter: (reciterDetails) => {
+	uploadReciter: (reciterDetails) => {
 		return (dispatch) => {
-			dispatch(AddReciter(reciterDetails))
+			dispatch(uploadReciter(reciterDetails))
 		}
 	}
 }
 export default withRouter(connect(
 	mapStateToProps, mapDispatchToProps
-)(reduxForm({ form: 'AddReciters'})(AddReciters)))
+)(reduxForm({ form: 'AddReciter'})(AddReciter)))
