@@ -63,12 +63,11 @@ class ReciterCard extends Component {
 	}
 
 	render() {
+
 		const {
-			children,
-			theme,
 			classes
 		} = this.props
-		console.log(this.props.reciter, 'reciter')
+
 		return (
 			
 			<div
@@ -80,7 +79,7 @@ class ReciterCard extends Component {
 					transitionEnabled={true}
 				>
 						<div style={{height: '220px', overflow: 'hidden'}}>
-							<img style={{minHeight: '100%', minWidth: '100%'}} src={`http://thequranreciters.com/reciters/images/lg/${this.props.reciter.id}-lg.jpg`}></img>
+							<img style={{height: 'auto', width: '100%'}} src={`http://thequranreciters.com/reciters/images/lg/${this.props.reciter.id}-lg.jpg`}></img>
 						</div>
 						<div className={classes.cardTextHolder}> {(this.props.reciter) ?
 							 <Typography style={{textAlign: 'center', fontWeight: 300, marginTop: '4px' }} type="subheading">

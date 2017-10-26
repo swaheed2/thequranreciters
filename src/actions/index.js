@@ -1,1 +1,2 @@
-export * from './reciters-actions.js'
+export * from './reciters-actions'
+export * from './audio-player-actions'

@@ -5,47 +5,69 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import PlayArrow from 'material-ui-icons/PlayArrow';
-import * as Howler from 'howler';
+import Pause from 'material-ui-icons/Pause';
 
 const styles = theme => {
-
-	console.log(theme);
 	return {
 		audioPlayer: {
 			position: 'fixed',
 			bottom: '0',
 			background: theme.primary,
-			width: '100%'
+			width: '100%',
+			minHeight: '45px',
+			color: 'white'
 		},
-		flex: {
+		title: {
+			color: 'white'
+		},
+		playerBtn: {
 			color: 'white'
 		}
 	}
 }
 
 class AudioPlayer extends Component {
-	componentDidMount() {
+
+	constructor() {
+		super();
 	}
-	play() {
-		const sound = new Howler.Howl({
-			src: ['https://archive.org/download/AlaaAlmezjaji/016.mp3'],
-			html5: true
-		});
-		console.log('playing');
-		sound.play();
+	componentDidMount() {
+
 	}
 	render() {
 		const cls = this.props.classes;
+
+
+		const playing = this.props.playing;
+
+		let playPauseBtn;
+
+		if (playing) {
+			playPauseBtn = (
+				<IconButton onClick={this.props.pause}
+					className={cls.playerBtn} aria-label="Pause">
+					<Pause />
+				</IconButton>
+			)
+		}
+		else {
+			playPauseBtn = (
+				<IconButton onClick={this.props.play}
+					className={cls.playerBtn} aria-label="Play">
+					<PlayArrow />
+				</IconButton>
+			)
+		}
+
 		return (
 
 			<Toolbar className={cls.audioPlayer}>
-				<IconButton onClick={this.play}
-					className={cls.menuButton} aria-label="Play">
-					<PlayArrow style={{ color: 'white' }} />
-				</IconButton>
-				<Typography type="title" className={cls.flex}>
+
+				{playPauseBtn}
+
+				<Typography type="title" className={cls.title}>
 					An-Nahl
-		          </Typography>
+		        </Typography>
 			</Toolbar>
 		)
 	}

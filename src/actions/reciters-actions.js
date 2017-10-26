@@ -1,11 +1,10 @@
 import http from 'axios';
-import axios from 'axios';
 import { API_URL, RECITERS_ACTION_TYPES } from '../config'
 import { SamplePosting } from './sample'
 
 export function uploadReciter(details) {
 	return (dispatch) => {
-		axios.post('http://rest.learncode.academy/api/johnbob/friends', { details })
+		http.post('http://rest.learncode.academy/api/johnbob/friends', { details })
 			.then(function (response) {
 				dispatch({
 					type: 'ADD_RECITER',
@@ -17,7 +16,6 @@ export function uploadReciter(details) {
 
 export function fetchReciters(name) {
 	let url = API_URL + '/reciters-list'
-	console.log('action fetch')
     /**
      * TODO
 	 * // we should filter in backend

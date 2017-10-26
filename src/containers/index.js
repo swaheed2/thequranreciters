@@ -1,5 +1,5 @@
 
-export { default as Home } from './Home';
-export { default as Reciters } from './Reciters';
-export { default as AddReciter } from './AddReciter';
-export { default as AudioPlayer } from './AudioPlayer'; 
+export { default as Home } from './HomeContainer';
+export { default as Reciters } from './RecitersContainer';
+export { default as AddReciter } from './AddReciterContainer';
+export { default as AudioPlayer } from './AudioPlayerContainer'; 
