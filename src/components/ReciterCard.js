@@ -5,17 +5,16 @@ import { withStyles } from 'material-ui/styles'
 import { grey } from 'material-ui/colors';
 
 const styles = theme => ({
-		cardStyle: {
-  		width: '100%',
-  		cursor: 'pointer',
-  		transition: `all 0.1s ease`,
- 		minHeight: '250px',
- 		backgroundColor: grey[100], 
- 		'&:hover': {
- 			filter:'brightness(120%)',
- 			transition: `all 0.2s ease`
- 		}
-  		
+	cardStyle: {
+		width: '100%',
+		cursor: 'pointer',
+		transition: `all 0.1s ease`,
+		minHeight: '250px',
+		backgroundColor: grey[100], 
+		'&:hover': {
+			filter:'brightness(120%)',
+			transition: `all 0.2s ease`
+		}		
   	},
 		cardTextHolder: {
 			backgroundColor: grey[100],
@@ -31,7 +30,6 @@ const styles = theme => ({
 			verticalAlign:'top',
 		},
 		cardReciter: {
-			
 			boxSizing: 'border-box',
 			padding: '7px',
 			'@media all and (max-width: 1690px)':
@@ -70,13 +68,10 @@ class ReciterCard extends Component {
 
 		return (
 			
-			<div
-				className={classes.cardReciter}
-				>
+			<div className={classes.cardReciter}>
 				<Paper 
+					onClick={this.props.onClick}
 					className={classes.cardStyle}
-					zDepth={3} 
-					transitionEnabled={true}
 				>
 						<div style={{height: '220px', overflow: 'hidden'}}>
 							<img style={{height: 'auto', width: '100%'}} src={`http://thequranreciters.com/reciters/images/lg/${this.props.reciter.id}-lg.jpg`}></img>

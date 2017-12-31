@@ -21,12 +21,12 @@ class MyAppBar extends React.Component {
     render() {
         const { classes } = this.props;
         return <div className={classes.root}>
-            <AppBar position="static" color='white'>
+            <AppBar position="static">
                 <Toolbar>
-                    <IconButton className={classes.menuButton} color="black" aria-label="Menu">
+                    <IconButton className={classes.menuButton} aria-label="Menu">
                         <MenuIcon />
                     </IconButton>
-                    <Typography type="title" color="black" className={classes.flex}>
+                    <Typography type="title" className={classes.flex}>
                         The Quran Reciters
                 </Typography>
                 </Toolbar>

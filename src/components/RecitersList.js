@@ -15,15 +15,18 @@ const styles = theme => ({
 
 })
 const RecitersList = (props) => {
-	const renderList = () => (
-		<div className={props.classes.containerStyle}>
-			{(props.list) ? props.list.map(reciter => (<ReciterCard key={reciter.id} reciter={reciter} />)) : null}
-		</div>
-	)
+	const list = props.list ? props.list : [];
 	return (
-		<Paper>
-			{renderList()}
-		</Paper>
+		<div className={props.classes.containerStyle}>
+			{
+				list.map(reciter => (
+					<ReciterCard
+						onClick={props.onReciterClick}
+						key={reciter.id} reciter={reciter}
+					/>
+				))
+			}
+		</div>
 	)
 }
 export default withStyles(styles)(RecitersList)

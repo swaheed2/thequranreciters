@@ -7,7 +7,10 @@ const initialState = {
     stopped: true,
     url: null,
     duration: 0,
-    sound: null
+    progress: 0,
+    sound: null,
+    progressInterval: null
+
 }
 
 const AudioPlayerReducer = (state = initialState, action) => {
@@ -18,32 +21,93 @@ const AudioPlayerReducer = (state = initialState, action) => {
 
         case 'PLAY':
 
+            // sound obj not initialzed 
+            // and no src provided
+            if (!newState.sound && !action.src) {
+                break;
+            }
+
             if (!newState.sound) {
                 newState.sound = new Howler.Howl({
-                    src: ['https://archive.org/download/AlaaAlmezjaji/016.mp3'],
+                    src: [action.src],
                     html5: true
                 });
             }
 
-            newState.playing = true;
-            newState.paused = false;
-            newState.src = action.src;
+            if (newState.playing) {
+                stopPlaying(newState);
+            }
 
-            newState.sound.play();
+            startPlaying(newState, action);
+
 
             break;
 
         case 'PAUSE':
-            newState.playing = false;
-            newState.paused = true;
-            newState.sound.pause();
+            pausePlaying(newState);
+            break;
+
+        case 'STOP':
+            stopPlaying(newState);
+            break;
+
+        case 'UPDATE_PROGRESS':
+            newState.progress = newState.sound.seek();
+            newState.duration = newState.sound.duration()
+            break;
+
+        case 'SEEK_TO':
+            if (action.value && newState.sound) {
+                const seekingTo = newState.duration * (action.value / 100);
+                newState.progress = seekingTo;
+                newState.sound.seek(seekingTo);
+            }
+            break;
+
+        case 'CLEAR_PROGRESS_INTERVAL':
+            clearInterval(newState.progressInterval)
+            break;
+
+        case 'SET_PROGRESS_INTERVAL':
+            newState.progressInterval = action.value;
             break;
 
         default:
             break;
     }
-    console.log(newState)
     return newState;
+}
+
+function startPlaying(newState, action) {
+    newState.playing = true;
+    newState.paused = false;
+    newState.stopped = false;
+    newState.src = action.src;
+    newState.sound.play();
+}
+
+function stopPlaying(newState) {
+    if (!newState.sound) {
+        return;
+    }
+    newState.playing = false;
+    newState.paused = false;
+    newState.stopped = true;
+    newState.sound.stop();
+}
+
+function pausePlaying(newState) {
+    if (!newState.sound) {
+        return;
+    }
+    newState.playing = false;
+    newState.stopped = false;
+    newState.paused = true;
+    newState.sound.pause();
+}
+
+function onseek(s) {
+    console.log(s)
 }
 
 export default AudioPlayerReducer
