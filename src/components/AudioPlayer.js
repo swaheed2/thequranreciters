@@ -1,45 +1,40 @@
 import React, { Component } from 'react';
 import { withStyles } from 'material-ui/styles';
 import Button from 'material-ui/Button';
-import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import PlayArrow from 'material-ui-icons/PlayArrow';
 import Pause from 'material-ui-icons/Pause';
+import Refresh from 'material-ui-icons/Refresh';
 import Slider from 'rc-slider/lib/Slider';
 import 'rc-slider/assets/index.css';
+import Grid from 'material-ui/Grid';
 
 const styles = theme => {
 	return {
 		audioPlayer: {
 			position: 'fixed',
-			bottom: '0',
-			background: theme.primary,
-			width: '100%',
-			minHeight: '45px',
-			color: 'white',
-			padding: '10px 10px',
-			display: 'flex',
-			flexDirection: 'column'
+			bottom: '0px',
+			background: theme.primary
 		},
 		playerBtns: {
 			display: 'flex',
-			flexDirection: 'row'
+			flexDirection: 'row',
+			padding: '0px 8px !important',
+			alignItems: 'center'
 		},
 		// player btns
 		playerBtn: {
 			flex: '1',
-			color: 'white',
-			flexBasis: 'auto',
-			width: '30px',
-			padding: '0px 10px',
-			width: '100%'
+			color: 'white'
 		},
-		audioInfo:{
+		audioInfo: {
 			flex: '1',
 			display: 'flex',
 			flexDirection: 'row',
-			width: '100%'
+			alignItems: 'center',
+			height: '70px',
+			padding: '0px 8px !important'
 		},
 		// audio info
 		title: {
@@ -56,11 +51,18 @@ const styles = theme => {
 			flex: '1',
 			margin: '0px 0px',
 			paddingRight: '20px',
-			verticalAlign: 'bottom'
+			verticalAlign: 'bottom',
+			display: 'inline-block'
 		},
 		icon: {
-			width: '44px',
-			height: '44px'
+			width: '24px',
+			height: '24px'
+		},
+		iconFlip: {
+			'-webkit-transform': 'scaleX(-1)',
+			transform: 'scaleX(-1)',
+			width: '24px',
+			height: '24px'
 		}
 	}
 }
@@ -73,6 +75,8 @@ class AudioPlayer extends Component {
 		super();
 		this.play = this.play.bind(this);
 		this.pause = this.pause.bind(this);
+		this.skipForward = this.skipForward.bind(this);
+		this.rewindBack = this.rewindBack.bind(this);
 		this.onBeforeChange = this.onBeforeChange.bind(this);
 		this.onAfterChange = this.onAfterChange.bind(this);
 	}
@@ -87,6 +91,14 @@ class AudioPlayer extends Component {
 
 	pause() {
 		this.props.pause();
+	}
+
+	skipForward(){
+		this.props.skipForward();
+	}
+
+	rewindBack(){
+		this.props.rewindBack();
 	}
 
 	getProgress() {
@@ -170,19 +182,18 @@ class AudioPlayer extends Component {
 		}
 
 		return (
-
-			<Toolbar className={cls.audioPlayer}>
-
-				<div className={cls.playerBtns}>
+			<Grid container className={cls.audioPlayer}>
+				<Grid
+					item sm={12} md={3} lg={2} xl={1} className={cls.playerBtns}>
 
 
 					<IconButton
 						classes={{
-							icon: cls.icon
+							icon: cls.iconFlip
 						}}
-						onClick={this.play}
-						className={cls.playerBtn} aria-label="Play">
-						<PlayArrow />
+						onClick={this.rewindBack}
+						className={cls.playerBtn}>
+						<Refresh />
 					</IconButton>
 
 					{playPauseBtn}
@@ -191,16 +202,19 @@ class AudioPlayer extends Component {
 						classes={{
 							icon: cls.icon
 						}}
-						onClick={this.play}
-						className={cls.playerBtn} aria-label="Play">
-						<PlayArrow />
+						onClick={this.skipForward}
+						className={cls.playerBtn}>
+						<Refresh />
 					</IconButton>
-				</div>
+				</Grid>
 
-				<div className={cls.audioInfo}>
+				<Grid item
+					xs
+					className={cls.audioInfo}>
+
 					<Typography type="title" className={cls.title}>
 						An-Nahl
-		        	</Typography>
+		        		</Typography>
 
 					<Typography type="subheading" className={cls.time}>
 						{this.formattedProgress(this.props.progress)}
@@ -208,7 +222,7 @@ class AudioPlayer extends Component {
 
 					<div className={cls.slider}>
 						<Slider
-							style={{padding:'10px 0'}}
+							style={{ padding: '10px 0' }}
 							onAfterChange={this.onAfterChange}
 							onBeforeChange={this.onBeforeChange}
 							step={.00001}
@@ -219,9 +233,8 @@ class AudioPlayer extends Component {
 					<Typography type="subheading" className={cls.time}>
 						{this.formattedProgress(this.props.duration)}
 					</Typography>
-				</div>
-
-			</Toolbar>
+				</Grid>
+			</Grid>
 		)
 	}
 }

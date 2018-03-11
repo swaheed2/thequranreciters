@@ -3,7 +3,7 @@ import AudioPlayer from '../components/AudioPlayer'
 import {
 	play, pause,
 	seekTo, clearProgressInterval,
-	monitorProgress
+	monitorProgress, rewindBack, skipForward
 } from '../actions/'
 
 const mapStateToProps = (state) => {
@@ -23,6 +23,16 @@ const mapDispatchToProps = {
 	pause: () => {
 		return (dispatch) => {
 			dispatch(pause())
+		}
+	},
+	skipForward: () => {
+		return (dispatch) => {
+			dispatch(skipForward())
+		}
+	},
+	rewindBack: () => {
+		return (dispatch) => {
+			dispatch(rewindBack())
 		}
 	},
 	seekTo: (progress) => {

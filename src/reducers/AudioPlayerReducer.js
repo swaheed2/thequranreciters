@@ -47,20 +47,33 @@ const AudioPlayerReducer = (state = initialState, action) => {
             pausePlaying(newState);
             break;
 
+        case 'FORWARD':
+            const newSeek = newState.progress + 15;
+            if (newState.duration > newSeek) {
+                seekTo(newState, newSeek);
+            }
+            break;
+
+        case 'REWIND':
+            const backSeek = newState.progress - 15;
+            if (backSeek > 0) {
+                seekTo(newState, backSeek);
+            }
+            break;
+
         case 'STOP':
             stopPlaying(newState);
             break;
 
         case 'UPDATE_PROGRESS':
             newState.progress = newState.sound.seek();
-            newState.duration = newState.sound.duration()
+            newState.duration = newState.sound.duration();
             break;
 
         case 'SEEK_TO':
             if (action.value && newState.sound) {
                 const seekingTo = newState.duration * (action.value / 100);
-                newState.progress = seekingTo;
-                newState.sound.seek(seekingTo);
+                seekTo(newState, seekingTo);
             }
             break;
 
@@ -108,6 +121,12 @@ function pausePlaying(newState) {
 
 function onseek(s) {
     console.log(s)
+}
+
+function seekTo(newState, seekingTo) {
+    console.log('seeking to');
+    newState.progress = seekingTo;
+    newState.sound.seek(seekingTo);
 }
 
 export default AudioPlayerReducer

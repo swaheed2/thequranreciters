@@ -19,6 +19,21 @@ export function pause() {
     }
 }
 
+export function skipForward() {
+    return (dispatch) => {
+        dispatch({
+            type: 'FORWARD'
+        })
+    }
+}
+export function rewindBack() {
+    return (dispatch) => {
+        dispatch({
+            type: 'REWIND'
+        })
+    }
+}
+
 export function clearProgressInterval() {
     return (dispatch) => {
         _clearProgInterval(dispatch)
