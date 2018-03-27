@@ -65,7 +65,6 @@ function _clearProgInterval(dispatch) {
 
 function _monitorProgress(dispatch) {
     if(!dispatch){
-        console.log('dispatch', dispatch);
         return;
     }
     const progressInterval = setInterval(() => {

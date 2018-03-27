@@ -119,12 +119,7 @@ function pausePlaying(newState) {
     newState.sound.pause();
 }
 
-function onseek(s) {
-    console.log(s)
-}
-
 function seekTo(newState, seekingTo) {
-    console.log('seeking to');
     newState.progress = seekingTo;
     newState.sound.seek(seekingTo);
 }

@@ -4,7 +4,7 @@ import SearchBar from './SearchBar'
 
 const styles = theme => ({
     banner: {
-        background: theme.primary,
+        background: 'white',
         minHeight: '380px',
         paddingTop: '18px'
     },

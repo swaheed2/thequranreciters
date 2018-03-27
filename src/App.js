@@ -1,22 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
-import { Home, Reciters, AddReciter } from './containers'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { Home, ReciterDetails, AddReciter } from './containers'
 import { MuiThemeProvider } from 'material-ui/styles'
 import { theme } from './config'
+import { AppShell } from './components'
 
 const App = () => {
 	return (
 		<Router>
 			<MuiThemeProvider theme={theme}>
-				<div>
+				<AppShell>
 					<Route exact path='/' component={Home} />
-					<Route path='/reciters' component={Reciters} />
-					<Route path='/reciters/:reciter' render={(props) => (<h2>Reciter # {props.match.params.reciter}</h2>)} />
+					<Route path='/reciters/:reciterId' component={ReciterDetails} />
 					<Route path='/contact' render={() => (<h2>Contact</h2>)} />
 					<Route path='/submission' render={() => (<h2>Submission</h2>)} />
 					<Route path="/add-reciters" component={AddReciter} />
-				</div>
+				</AppShell>
 			</MuiThemeProvider>
 		</Router>
 	)

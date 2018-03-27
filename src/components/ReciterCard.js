@@ -9,21 +9,31 @@ const styles = theme => ({
 		width: '100%',
 		cursor: 'pointer',
 		transition: `all 0.1s ease`,
-		minHeight: '250px',
-		backgroundColor: grey[100],
+		backgroundColor: 'transparent',
 		'&:hover': {
 			filter: 'brightness(120%)',
 			transition: `all 0.2s ease`
 		}
 	},
+	imageHolder: {
+		width: '80px',
+		height: '80px',
+		borderRadius: '50%',
+		overflow: 'hidden',
+		border: '.5px solid #fff',
+		margin: '0 auto'
+	},
 	cardTextHolder: {
-		backgroundColor: grey[100],
-		margin: '0 auto',
-		minHeight: '60px'
+		backgroundColor: 'transparent',
+		height: '70px',
+		overflow: 'hidden'
 	},
 	cardText: {
-		padding: '20px 10px',
-		textAlign: 'center'
+		padding: '20px 5px',
+		textAlign: 'center',    
+		fontSize: '14px',
+		fontWeight: '450',
+		color: grey[800]
 	},
 	cardReciter: {
 		boxSizing: 'border-box'
@@ -40,7 +50,7 @@ class ReciterCard extends Component {
 	}
 
 	render() {
-
+		//console.log(this.props.imgUrl);
 		const {
 			classes
 		} = this.props
@@ -48,13 +58,14 @@ class ReciterCard extends Component {
 		return (
 
 			<div className={classes.cardReciter}>
-				<Paper
+				<Paper elevation={0}
 					onClick={this.props.onClick}
 					className={classes.cardStyle}
 				>
-					<div style={{ height: '200px', overflow: 'hidden' }}>
-						<img style={{ height: 'auto', width: '100%' }}
-							src={`http://thequranreciters.com/reciters/images/lg/${this.props.reciter.id}-lg.jpg`}></img>
+					<div className={classes.imageHolder}>
+						<img alt={this.props.reciter.name}
+							style={{ height: '100%', width: '100%' }}
+							src={this.props.imgUrl}></img>
 					</div>
 					<div className={classes.cardTextHolder}> {(this.props.reciter) ?
 						<Typography className={classes.cardText} type="subheading">

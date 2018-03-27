@@ -14,14 +14,13 @@ class Reciters extends Component {
 		this.handleChange = this.handleChange.bind(this);
 	}
 	componentDidMount() {
-		this.props.fetchReciters()
+		//this.props.fetchReciters()
 	}
 	handleChange(event) {
-		this.props.fetchReciters(event.target.value.toLowerCase())
+		//this.props.fetchReciters(event.target.value.toLowerCase())
 	}
 	render() {
 		const recitersList = this.props.recitersList
-		const { classes } = this.props;
 		return (
 			<div>
 				<RecitersList list={recitersList} style={{ marginTop: 20 }} />

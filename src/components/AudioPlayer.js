@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withStyles } from 'material-ui/styles';
-import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import PlayArrow from 'material-ui-icons/PlayArrow';
@@ -9,24 +8,25 @@ import Refresh from 'material-ui-icons/Refresh';
 import Slider from 'rc-slider/lib/Slider';
 import 'rc-slider/assets/index.css';
 import Grid from 'material-ui/Grid';
+import { grey } from 'material-ui/colors';
 
 const styles = theme => {
 	return {
 		audioPlayer: {
 			position: 'fixed',
 			bottom: '0px',
-			background: theme.primary
+			background: theme.primary,
+			color: grey[800]
 		},
 		playerBtns: {
 			display: 'flex',
 			flexDirection: 'row',
-			padding: '0px 8px !important',
-			alignItems: 'center'
+			alignItems: 'center',
+			padding: '0 10px'
 		},
 		// player btns
 		playerBtn: {
-			flex: '1',
-			color: 'white'
+			flex: '1'
 		},
 		audioInfo: {
 			flex: '1',
@@ -34,23 +34,21 @@ const styles = theme => {
 			flexDirection: 'row',
 			alignItems: 'center',
 			height: '70px',
-			padding: '0px 8px !important'
+			textAlign: 'center'
 		},
 		// audio info
 		title: {
-			color: 'white',
-			margin: '0px 2%',
-			flexBasis: 'auto'
+			fontSize: '18px',
+			textAlign: 'center',
+			flex: '1 1 0'
 		},
 		time: {
-			color: 'white',
-			flexBasis: 'auto',
-			marginRight: '20px'
+			width: '55px'
 		},
 		slider: {
 			flex: '1',
-			margin: '0px 0px',
-			paddingRight: '20px',
+			minWidth: '130px',
+			padding: '0 10px',
 			verticalAlign: 'bottom',
 			display: 'inline-block'
 		},
@@ -93,11 +91,11 @@ class AudioPlayer extends Component {
 		this.props.pause();
 	}
 
-	skipForward(){
+	skipForward() {
 		this.props.skipForward();
 	}
 
-	rewindBack(){
+	rewindBack() {
 		this.props.rewindBack();
 	}
 
@@ -146,7 +144,11 @@ class AudioPlayer extends Component {
 		if (p < 3600) {
 			return date.toISOString().substr(14, 5);
 		}
-		return date.toISOString().substr(11, 8);
+		const iso = date.toISOString();
+
+		if (iso && iso.length > 18) {
+			return iso.substr(11, 8);
+		}
 	}
 
 	render() {
@@ -182,12 +184,27 @@ class AudioPlayer extends Component {
 		}
 
 		return (
-			<Grid container className={cls.audioPlayer}>
+			<Grid container spacing={0} className={cls.audioPlayer}>
 				<Grid
-					item sm={12} md={3} lg={2} xl={1} className={cls.playerBtns}>
+					item xs={12} sm={5} md={4} lg={3} xl={2}
+					className={cls.playerBtns}>
 
+					<Typography type="title" className={cls.title}>
+						An-Nahl
+		        		</Typography>
 
-					<IconButton
+					<div className={cls.slider}>
+						<Slider
+							onAfterChange={this.onAfterChange}
+							onBeforeChange={this.onBeforeChange}
+							step={.00001}
+							onChange={this.setProgress.bind(this)}
+							value={this.getProgress()} />
+					</div>
+
+					{playPauseBtn}
+
+					{/* 	<IconButton
 						classes={{
 							icon: cls.iconFlip
 						}}
@@ -205,16 +222,13 @@ class AudioPlayer extends Component {
 						onClick={this.skipForward}
 						className={cls.playerBtn}>
 						<Refresh />
-					</IconButton>
+					</IconButton> */}
 				</Grid>
 
-				<Grid item
+
+				{/* <Grid item
 					xs
 					className={cls.audioInfo}>
-
-					<Typography type="title" className={cls.title}>
-						An-Nahl
-		        		</Typography>
 
 					<Typography type="subheading" className={cls.time}>
 						{this.formattedProgress(this.props.progress)}
@@ -222,7 +236,6 @@ class AudioPlayer extends Component {
 
 					<div className={cls.slider}>
 						<Slider
-							style={{ padding: '10px 0' }}
 							onAfterChange={this.onAfterChange}
 							onBeforeChange={this.onBeforeChange}
 							step={.00001}
@@ -233,7 +246,7 @@ class AudioPlayer extends Component {
 					<Typography type="subheading" className={cls.time}>
 						{this.formattedProgress(this.props.duration)}
 					</Typography>
-				</Grid>
+				</Grid> */}
 			</Grid>
 		)
 	}
