@@ -4,19 +4,22 @@ import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import PlayArrow from 'material-ui-icons/PlayArrow';
 import Pause from 'material-ui-icons/Pause';
-import Refresh from 'material-ui-icons/Refresh';
 import Slider from 'rc-slider/lib/Slider';
 import 'rc-slider/assets/index.css';
 import Grid from 'material-ui/Grid';
 import { grey } from 'material-ui/colors';
+import Refresh from 'material-ui-icons/Refresh';
+import { contrastText } from '../config/theme'
+import Button from 'material-ui/Button';
 
 const styles = theme => {
 	return {
 		audioPlayer: {
 			position: 'fixed',
 			bottom: '0px',
-			background: theme.primary,
-			color: grey[800]
+			background: theme.palette.primary.light,
+			color: grey[800],
+			width: '100%'
 		},
 		playerBtns: {
 			display: 'flex',
@@ -38,23 +41,25 @@ const styles = theme => {
 		},
 		// audio info
 		title: {
-			fontSize: '18px',
 			textAlign: 'center',
-			flex: '1 1 0'
+			flex: '1 1 0',
+			overflow: 'hidden',
+			padding: '5px'
 		},
 		time: {
-			width: '55px'
+			width: '55px',
+			fontSize: '16px',
+			'@media all and (max-width: 500px)': {
+				fontSize: '12px',
+				width: '15px',
+				padding: '5px'
+			}
 		},
 		slider: {
-			flex: '1',
-			minWidth: '130px',
-			padding: '0 10px',
-			verticalAlign: 'bottom',
-			display: 'inline-block'
+			marginTop: '-8px',
+			height: '5px'
 		},
 		icon: {
-			width: '24px',
-			height: '24px'
 		},
 		iconFlip: {
 			'-webkit-transform': 'scaleX(-1)',
@@ -104,7 +109,7 @@ class AudioPlayer extends Component {
 		const duration = this.props.duration;
 
 		if ((!progress && !duration) || (progress && !duration)
-			|| duration && !progress) {
+			|| (duration && !progress)) {
 			return 0;
 		}
 
@@ -119,7 +124,6 @@ class AudioPlayer extends Component {
 		else if (normProgress < 0) {
 			normProgress = 0;
 		}
-
 		return normProgress;
 	}
 
@@ -139,12 +143,30 @@ class AudioPlayer extends Component {
 		if (!p) {
 			p = 0;
 		}
+
 		const date = new Date(null);
+
 		date.setSeconds(p);
+
+		let iso = undefined;
+
 		if (p < 3600) {
-			return date.toISOString().substr(14, 5);
+			iso = date.toISOString();
+
+			if (iso.substr(14, 1) == '0') {
+				return iso.substr(15, 4);
+			}
+			else {
+				return iso.substr(14, 5);
+			}
 		}
-		const iso = date.toISOString();
+
+
+		try {
+			iso = date.toISOString();
+		} catch (err) {
+			//console.error('p was ', p, err);
+		}
 
 		if (iso && iso.length > 18) {
 			return iso.substr(11, 8);
@@ -162,7 +184,7 @@ class AudioPlayer extends Component {
 			playPauseBtn = (
 				<IconButton
 					classes={{
-						icon: cls.icon
+						root: cls.icon
 					}}
 					onClick={this.pause}
 					className={cls.playerBtn} aria-label="Pause">
@@ -174,7 +196,7 @@ class AudioPlayer extends Component {
 			playPauseBtn = (
 				<IconButton
 					classes={{
-						icon: cls.icon
+						root: cls.icon
 					}}
 					onClick={this.play}
 					className={cls.playerBtn} aria-label="Play">
@@ -183,71 +205,89 @@ class AudioPlayer extends Component {
 			)
 		}
 
+		let audioPlayerInfo = (<span></span>);
+
+		let nowPlaying = this.props.nowPlaying;
+
+		if (nowPlaying) {
+			audioPlayerInfo = (
+				<div className={cls.audioPlayer}>
+					<div className={cls.slider}>
+						<Slider
+							railStyle={{ background: contrastText }}
+							onAfterChange={this.onAfterChange}
+							onBeforeChange={this.onBeforeChange}
+							step={.00001}
+							onChange={this.setProgress.bind(this)}
+							value={this.getProgress()} />
+					</div>
+
+					<Grid container spacing={0}>
+						<Grid
+							item xs={12}
+							className={cls.playerBtns}>
+
+							<Typography variant="caption" className={cls.title}>
+								{nowPlaying.title}
+							</Typography>
+
+							<Typography
+								align="center"
+								variant="body1" className={cls.time}>
+								{this.formattedProgress(this.props.progress)}
+							</Typography>
+
+
+							<IconButton
+								classes={{
+									root: cls.iconFlip
+								}}
+								onClick={this.rewindBack}
+								className={`${cls.playerBtn}`}>
+								<Refresh />
+							</IconButton>
+
+							{playPauseBtn}
+
+
+							<IconButton
+								classes={{
+									root: cls.icon
+								}}
+								onClick={this.skipForward}
+								className={cls.playerBtn}>
+								<Refresh />
+							</IconButton>
+
+
+							<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+								<IconButton
+									onClick={() => {
+										let r = this.props.rate + .25;
+										if (r > 2) {
+											r = .5;
+										}
+										this.props.updateRate(r);
+									}}
+									color="secondary"
+									className={cls.time}>
+									{this.props.rate}x
+								</IconButton>
+
+								<Typography
+									align="center"
+									variant="body1" className={cls.time}>
+									{this.formattedProgress(this.props.duration)}
+								</Typography>
+							</div>
+						</Grid>
+					</Grid>
+				</div>
+			)
+		}
+
 		return (
-			<Grid container spacing={0} className={cls.audioPlayer}>
-				<Grid
-					item xs={12} sm={5} md={4} lg={3} xl={2}
-					className={cls.playerBtns}>
-
-					<Typography type="title" className={cls.title}>
-						An-Nahl
-		        		</Typography>
-
-					<div className={cls.slider}>
-						<Slider
-							onAfterChange={this.onAfterChange}
-							onBeforeChange={this.onBeforeChange}
-							step={.00001}
-							onChange={this.setProgress.bind(this)}
-							value={this.getProgress()} />
-					</div>
-
-					{playPauseBtn}
-
-					{/* 	<IconButton
-						classes={{
-							icon: cls.iconFlip
-						}}
-						onClick={this.rewindBack}
-						className={cls.playerBtn}>
-						<Refresh />
-					</IconButton>
-
-					{playPauseBtn}
-
-					<IconButton
-						classes={{
-							icon: cls.icon
-						}}
-						onClick={this.skipForward}
-						className={cls.playerBtn}>
-						<Refresh />
-					</IconButton> */}
-				</Grid>
-
-
-				{/* <Grid item
-					xs
-					className={cls.audioInfo}>
-
-					<Typography type="subheading" className={cls.time}>
-						{this.formattedProgress(this.props.progress)}
-					</Typography>
-
-					<div className={cls.slider}>
-						<Slider
-							onAfterChange={this.onAfterChange}
-							onBeforeChange={this.onBeforeChange}
-							step={.00001}
-							onChange={this.setProgress.bind(this)}
-							value={this.getProgress()} />
-					</div>
-
-					<Typography type="subheading" className={cls.time}>
-						{this.formattedProgress(this.props.duration)}
-					</Typography>
-				</Grid> */}
-			</Grid>
+			audioPlayerInfo
 		)
 	}
 }

@@ -12,9 +12,10 @@ ReactDOM.render(
 	</Provider>,
 	document.getElementById('root'));
 
-if ('serviceWorker' in navigator) {
+/* if ('serviceWorker' in navigator) {
 	navigator.serviceWorker.ready.then(registration => {
 		registration.unregister();
 	});
-}
-//registerServiceWorker();
+} */
+
+registerServiceWorker();

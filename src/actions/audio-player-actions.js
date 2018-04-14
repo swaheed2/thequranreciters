@@ -1,10 +1,22 @@
 
+/**
+ * 
+ * @param {{ src: string, albumId: string, trackId:string }=} obj 
+ */
+export function play(obj) {
 
-export function play(src) {
+    let src = undefined;
+
+    if (obj) {
+        src = `https://archive.org/download/${obj.albumId}${obj.trackId}`;
+        obj.src = src;
+    }
+
     return (dispatch) => {
         dispatch({
             type: 'PLAY',
-            src: src
+            src: src,
+            data: obj
         })
         _monitorProgress(dispatch);
     }
@@ -17,6 +29,20 @@ export function pause() {
         })
         _clearProgInterval(dispatch);
     }
+}
+
+/**
+ * 
+ * @param {number} rate 
+ */
+export function updateRate(rate) {
+    return (dispatch) => {
+        dispatch({
+            type: 'UPDATE_RATE',
+            value: rate
+        })
+    }
+
 }
 
 export function skipForward() {
@@ -64,7 +90,7 @@ function _clearProgInterval(dispatch) {
 }
 
 function _monitorProgress(dispatch) {
-    if(!dispatch){
+    if (!dispatch) {
         return;
     }
     const progressInterval = setInterval(() => {

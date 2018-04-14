@@ -1,9 +1,16 @@
-import { RECITERS_ACTION_TYPES, RECITERS_IMAGES, RECITER_IMAGE, TRACKS } from '../config';
+import {
+	RECITERS_ACTION_TYPES, RECITERS_IMAGES, RECITER_IMAGE, TRACKS,
+	RECITER
+
+} from '../config';
 const initialState = {
 	recitersList: undefined,
+	topReciters: undefined,
 	reciterImages: {},
 	albumTracks: {},
-	selectedAlbum: undefined
+	selectedAlbum: undefined,
+	albumLoading: false,
+	viewCounts: {}
 }
 
 const RecitersReducer = (state = initialState, action) => {
@@ -22,6 +29,7 @@ const RecitersReducer = (state = initialState, action) => {
 				newState.reciterImages = {};
 			}
 			newState.reciterImages = Object.assign({}, newState.reciterImages, action.data)
+			newState.reciterImages.complete = true;
 			break;
 
 		case RECITER_IMAGE.COMPLETE:
@@ -31,9 +39,37 @@ const RecitersReducer = (state = initialState, action) => {
 			newState.reciterImages = Object.assign({}, newState.reciterImages, action.data)
 			break;
 
-		case TRACKS.COMPLETE:
+		case TRACKS.COMPLETE: // aka select album
+			let tracks;
+			// tracks not required if already set
+			if (action.data.tracks) {
+				tracks = action.data.tracks;
+				delete action.data.tracks;
+			}
+			if (tracks) {
+				const trackObj = {};
+				trackObj[action.data.albumId] = tracks
+				newState.albumTracks = Object.assign(newState.albumTracks, trackObj)
+			}
 			newState.selectedAlbum = Object.assign({}, action.data);
-			newState.albumTracks = Object.assign(newState.albumTracks, action.data)
+			newState.albumLoading = false;
+			break;
+
+		case TRACKS.LOADING:
+			newState.albumLoading = action.data; // album id
+			console.log('setting album loading', action.data);
+			break;
+
+		case TRACKS.UNSET_SELECTED_ALBUM:
+			newState.selectedAlbum = undefined;
+			break;
+
+		case RECITER.UPDATED_VIEW_COUNT:
+			newState.viewCounts[action.data.reciterId] = action.data.views
+			break;
+
+		case RECITER.TOP:
+			newState.topReciters = action.data;
 			break;
 
 		default:

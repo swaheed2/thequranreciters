@@ -1,23 +1,26 @@
 import { connect } from 'react-redux'
 import AudioPlayer from '../components/AudioPlayer'
 import {
-	play, pause,
+	pause,
 	seekTo, clearProgressInterval,
-	monitorProgress, rewindBack, skipForward
+	monitorProgress, rewindBack, skipForward, updateRate, play
 } from '../actions/'
 
 const mapStateToProps = (state) => {
 	return {
 		playing: state.AudioPlayer.playing,
 		progress: state.AudioPlayer.progress,
-		duration: state.AudioPlayer.duration
+		duration: state.AudioPlayer.duration,
+		nowPlaying: state.AudioPlayer.nowPlaying,
+		rate: state.AudioPlayer.rate
 	}
 }
 
 const mapDispatchToProps = {
 	play: () => {
 		return (dispatch) => {
-			dispatch(play('https://ia800408.us.archive.org/27/items/AlaaAlmezjaji/1437-5-2_Maghreb.mp3'));
+			// play from nowPlaying
+			dispatch(play());
 		}
 	},
 	pause: () => {
@@ -48,6 +51,14 @@ const mapDispatchToProps = {
 	monitorProgress: () => {
 		return (dispatch) => {
 			dispatch(monitorProgress())
+		}
+	},
+	/**
+	 * @param {number} rate
+	 */
+	updateRate: (rate) => {
+		return (dispatch) => {
+			dispatch(updateRate(rate));
 		}
 	}
 }

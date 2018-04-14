@@ -26,7 +26,10 @@ const styles = theme => ({
 	cardTextHolder: {
 		backgroundColor: 'transparent',
 		height: '70px',
-		overflow: 'hidden'
+		overflow: 'hidden',
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center'
 	},
 	cardText: {
 		padding: '20px 5px',

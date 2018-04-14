@@ -1,15 +1,16 @@
-import { RECITERS_ACTION_TYPES } from '../config';
 import * as Howler from 'howler';
 
 const initialState = {
     playing: false,
     paused: false,
     stopped: true,
-    url: null,
+    url: undefined,
     duration: 0,
     progress: 0,
-    sound: null,
-    progressInterval: null
+    rate: 1,
+    sound: undefined,
+    progressInterval: undefined,
+    nowPlaying: undefined
 
 }
 
@@ -24,22 +25,51 @@ const AudioPlayerReducer = (state = initialState, action) => {
             // sound obj not initialzed 
             // and no src provided
             if (!newState.sound && !action.src) {
+                console.error('no sound object initialized and play called');
                 break;
             }
 
+            let newAudio = false;
+
+            /**
+             * playing first time
+             */
             if (!newState.sound) {
+                newState.sound = new Howler.Howl({
+                    src: [action.src],
+                    html5: true,
+                    rate: 1
+                });
+                newAudio = true;
+                newState.nowPlaying = action.data;
+            }
+
+            /**
+             * Play new audio than currently playing
+             */
+            else if (
+                action.src &&
+                newState.nowPlaying &&
+                newState.nowPlaying.src !== action.src) {
+
                 newState.sound = new Howler.Howl({
                     src: [action.src],
                     html5: true
                 });
+
+                newAudio = true;
+
+                newState.nowPlaying = action.data;
             }
 
-            if (newState.playing) {
-                stopPlaying(newState);
+            if (newAudio) {
+                const savedSeek = localStorage.getItem(newState.nowPlaying.src);
+                if (savedSeek) {
+                    seekTo(newState, savedSeek);
+                }
             }
 
             startPlaying(newState, action);
-
 
             break;
 
@@ -66,14 +96,29 @@ const AudioPlayerReducer = (state = initialState, action) => {
             break;
 
         case 'UPDATE_PROGRESS':
-            newState.progress = newState.sound.seek();
-            newState.duration = newState.sound.duration();
+            if (newState.sound) {
+                newState.progress = newState.sound.seek();
+                newState.duration = newState.sound.duration();
+                if (newState.sound.playing()) {
+                    newState.playing = true;
+                    newState.paused = false;
+                    newState.stopped = false;
+                }
+                localStorage.setItem(newState.nowPlaying.src, newState.progress + '');
+            }
             break;
 
         case 'SEEK_TO':
             if (action.value && newState.sound) {
                 const seekingTo = newState.duration * (action.value / 100);
                 seekTo(newState, seekingTo);
+            }
+            break;
+
+        case 'UPDATE_RATE':
+            if (action.value && newState.sound) {
+                newState.sound.rate(action.value);
+                newState.rate = action.value;
             }
             break;
 
@@ -91,7 +136,12 @@ const AudioPlayerReducer = (state = initialState, action) => {
     return newState;
 }
 
-function startPlaying(newState, action) {
+function startPlaying(newState, action, s) {
+
+    if (newState.playing) {
+        stopPlaying(newState);
+    }
+
     newState.playing = true;
     newState.paused = false;
     newState.stopped = false;
@@ -106,7 +156,12 @@ function stopPlaying(newState) {
     newState.playing = false;
     newState.paused = false;
     newState.stopped = true;
-    newState.sound.stop();
+    window.Howler._howls.forEach(element => {
+        if (element.playing()) {
+            element.stop();
+        }
+    });
+    console.log('stopping sounds');
 }
 
 function pausePlaying(newState) {
