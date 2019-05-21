@@ -13,7 +13,9 @@ import {
 import Tabs, { Tab } from 'material-ui/Tabs';
 import { grey } from 'material-ui/colors';
 import Button from 'material-ui/Button';
+import IconButton from 'material-ui/IconButton';
 import ShowChart from 'material-ui-icons/ShowChart';
+import FileDownload from 'material-ui-icons/FileDownload';
 import { CircularProgress } from 'material-ui/Progress';
 
 const styles = theme => ({
@@ -46,10 +48,13 @@ const styles = theme => ({
     },
     track: {
         padding: '10px 5px',
+        display: 'flex'
+    },
+    trackTitle: {
         cursor: 'pointer',
         ':hover': {
             filter: 'brightness(120%)'
-        }
+        },
     },
     playing: {
         color: theme.palette.primary.contrastText
@@ -60,7 +65,7 @@ class ReciterDetailsContainer extends Component {
     constructor() {
         super();
         this.getAlbumTracks = this.getAlbumTracks.bind(this);
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -69,13 +74,21 @@ class ReciterDetailsContainer extends Component {
             const reciterDetails = nextProps.reciterDetails;
             const reciterId = reciterDetails.info.id;
 
-            // should only happen once per load
-            /* if (!nextProps.reciterImages[reciterId]) {
-                this.props.setReciterImage(reciterId);
-            } */
-
             if (!nextProps.viewCounts[reciterId]) {
                 this.props.updateReciterViewCount(reciterId);
+            }
+
+            
+            if(reciterDetails && reciterDetails.info){
+                let t = document.title.split(' - ');
+                let originalTitle = '';
+                if(t.length > 1){
+                    originalTitle = t[1];
+                }
+                else{
+                    originalTitle = t[0];
+                }
+                document.title = reciterDetails.info.fullName + ' - ' + originalTitle;
             }
 
             const albums = reciterDetails.albums;
@@ -104,7 +117,7 @@ class ReciterDetailsContainer extends Component {
 
     getAlbumTracks(albumId, id, reciterDetails, albumLoading) {
 
-        if(albumLoading){
+        if (albumLoading) {
             return;
         }
 
@@ -164,6 +177,11 @@ class ReciterDetailsContainer extends Component {
             })
         }
         return k;
+    }
+
+    downloadTrack(track) {
+        const selectedAlbum = this.props.selectedAlbum || { id: 0 };
+        window.open(`https://archive.org/download/${selectedAlbum.albumId}${track.id}`, '_BLANK');
     }
 
     render() {
@@ -263,9 +281,19 @@ class ReciterDetailsContainer extends Component {
                                         return (
                                             <li
                                                 className={cl.join(' ')}
-                                                onClick={() => { this.playTrack(track) }}
                                                 key={id} >
-                                                {this.getTitle(track)}
+                                                <div
+                                                    className={classes.trackTitle}
+                                                    onClick={() => { this.playTrack(track) }}>
+                                                    {id + 1}. {this.getTitle(track)}
+                                                </div>
+                                                <span style={{ flex: 1 }}></span>
+                                                <IconButton
+                                                    onClick={() => { this.downloadTrack(track) }}
+                                                    style={{ height: '100%' }}>
+                                                    <FileDownload />
+                                                </IconButton>
+
                                             </li>
                                         )
                                     })

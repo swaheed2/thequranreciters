@@ -1,0 +1,2 @@
+Disallow: /reciters/thumamah-abdul-waheed
+Disallow: /assets/img/reciters/thumamah-abdul-waheed.jpg

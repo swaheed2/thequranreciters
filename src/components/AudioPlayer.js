@@ -10,7 +10,6 @@ import Grid from 'material-ui/Grid';
 import { grey } from 'material-ui/colors';
 import Refresh from 'material-ui-icons/Refresh';
 import { contrastText } from '../config/theme'
-import Button from 'material-ui/Button';
 
 const styles = theme => {
 	return {
@@ -19,7 +18,8 @@ const styles = theme => {
 			bottom: '0px',
 			background: theme.palette.primary.light,
 			color: grey[800],
-			width: '100%'
+			width: '100%',
+			zIndex: 100000
 		},
 		playerBtns: {
 			display: 'flex',
@@ -51,8 +51,8 @@ const styles = theme => {
 			fontSize: '16px',
 			'@media all and (max-width: 500px)': {
 				fontSize: '12px',
-				width: '15px',
-				padding: '5px'
+				width: '20px',
+				padding: '15px'
 			}
 		},
 		slider: {
@@ -210,6 +210,26 @@ class AudioPlayer extends Component {
 		let nowPlaying = this.props.nowPlaying;
 
 		if (nowPlaying) {
+			let lFlexNum = 1;
+			let forwardBtn = (
+				<IconButton
+					classes={{
+						root: cls.icon
+					}}
+					onClick={this.skipForward}
+					className={cls.playerBtn}>
+					<Refresh />
+				</IconButton>
+			);
+
+			if (window.innerWidth <= 400) {
+				forwardBtn = '';
+				lFlexNum = 2;
+			}
+			else if (window.innerWidth < 600) {
+				lFlexNum = 1.5;
+			}
+
 			audioPlayerInfo = (
 				<div className={cls.audioPlayer}>
 					<div className={cls.slider}>
@@ -250,17 +270,13 @@ class AudioPlayer extends Component {
 							{playPauseBtn}
 
 
-							<IconButton
-								classes={{
-									root: cls.icon
-								}}
-								onClick={this.skipForward}
-								className={cls.playerBtn}>
-								<Refresh />
-							</IconButton>
+							{forwardBtn}
 
 
-							<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+							<div style={{
+								flex: lFlexNum,
+								display: 'flex', justifyContent: 'center', alignItems: 'center'
+							}}>
 								<IconButton
 									onClick={() => {
 										let r = this.props.rate + .25;

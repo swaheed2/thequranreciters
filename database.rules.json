@@ -4,7 +4,8 @@
     ".write": "auth != null",
       
     "analytics":{
-       ".write": true
+       ".write": true,
+       ".indexOn": "views"
     }
   }
 }

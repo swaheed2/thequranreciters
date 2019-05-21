@@ -3,9 +3,12 @@ import {
 	RECITER
 
 } from '../config';
+
+import { recitersList, topReciters } from '../cache/reciters';
+
 const initialState = {
-	recitersList: undefined,
-	topReciters: undefined,
+	recitersList: recitersList,
+	topReciters: topReciters,
 	reciterImages: {},
 	albumTracks: {},
 	selectedAlbum: undefined,

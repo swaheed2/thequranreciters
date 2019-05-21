@@ -3,7 +3,7 @@
   "name": "The Quran Reciters",
   "icons": [
     {
-      "src": "assets/img/logo_192.png",
+      "src": "/assets/img/logo_192.png",
       "sizes": "192x192",
       "type": "image/png"
     }

@@ -54,9 +54,10 @@ class RecitersList extends React.Component {
 	}
 
 	componentWillMount() {
-		if (!this.props.topReciters) {
+		this.props.getTopReciters();
+		/* if (!this.props.topReciters) {
 			this.props.getTopReciters();
-		}
+		} */
 	}
 
 	toReciterDetails(reciter) {
@@ -83,64 +84,65 @@ class RecitersList extends React.Component {
 
 		let topItems = (<span />);
 
-		if (topReciters && isLoaded(list) && !isEmpty(list)) {
-			topItems = (
-				<div className={classes.favRoot}>
-					<Typography
-						variant="subheading"
-						className={classes.heading}>
-						<ShowChart /> <span>&nbsp;&nbsp;Trending Reciters</span>
-					</Typography>
-					<GridList cellHeight={160} className={classes.favGridList} cols={5}>
-						{
-							topReciters.map((key, id) => {
-								const imgUrl = '/assets/img/reciters/' + key + '.jpg';
-								return (
-									<Grid item key={id}
-										xs={4} sm={3} md={2} lg={1} xl={1}>
-										<ReciterCard
-											imgUrl={imgUrl}
-											onClick={() => { this.toReciterDetails(list[key]) }}
-											reciter={list[key]}
-										/>
-									</Grid>
-								)
-							})
-						}
-					</GridList>
-				</div>
-			)
-		}
+		topItems = (
+			<div className={classes.favRoot}>
+				<Typography
+					variant="subheading"
+					className={classes.heading}>
+					<ShowChart /> <span>&nbsp;&nbsp;Trending Reciters</span>
+				</Typography>
+				<GridList cellHeight={160} className={classes.favGridList} cols={5}>
+					{
+						topReciters.map((key, id) => {
+							const imgUrl = '/assets/img/reciters/' + key + '.jpg';
+							let card = (<span />)
+							if (list[key]) {
+								card = (
+									<ReciterCard
+										imgUrl={imgUrl}
+										onClick={() => { this.toReciterDetails(list[key]) }}
+										reciter={list[key]}
+									/>
+								);
+							}
+							return (
+								<Grid item key={id}
+									xs={4} sm={3} md={2} lg={1} xl={1}>
+									{card}
+								</Grid>
+							)
+						})
+					}
+				</GridList>
+			</div>
+		)
 
-		if (isLoaded(list) && !isEmpty(list)) {
-			listItems = (
-				<div>
-					<Typography
-						variant="subheading"
-						className={classes.heading}>
-						<List /> <span>&nbsp;&nbsp;All Reciters</span>
-					</Typography>
-					<Grid container spacing={16}>
-						{
-							Object.keys(list).map((key, id) => {
-								const imgUrl = '/assets/img/reciters/' + key + '.jpg';
-								return (
-									<Grid item key={id}
-										xs={4} sm={3} md={2} lg={1} xl={1}>
-										<ReciterCard
-											imgUrl={imgUrl}
-											onClick={() => { this.toReciterDetails(list[key]) }}
-											reciter={list[key]}
-										/>
-									</Grid>
-								)
-							})
-						}
-					</Grid>
-				</div>
-			);
-
-		}
+		listItems = (
+			<div>
+				<Typography
+					variant="subheading"
+					className={classes.heading}>
+					<List /> <span>&nbsp;&nbsp;All Reciters</span>
+				</Typography>
+				<Grid container spacing={16}>
+					{
+						Object.keys(list).map((key, id) => {
+							const imgUrl = '/assets/img/reciters/' + key + '.jpg';
+							return (
+								<Grid item key={id}
+									xs={4} sm={3} md={2} lg={1} xl={1}>
+									<ReciterCard
+										imgUrl={imgUrl}
+										onClick={() => { this.toReciterDetails(list[key]) }}
+										reciter={list[key]}
+									/>
+								</Grid>
+							)
+						})
+					}
+				</Grid>
+			</div>
+		);
 
 		return (
 			<div className={this.props.classes.containerStyle}>
@@ -154,7 +156,7 @@ class RecitersList extends React.Component {
 
 const mapStateToProps = (state) => {
 	return {
-		list: state.firebase.data.reciters,
+		list: state.firebase.data.reciters || state.RecitersReducer.recitersList,
 		topReciters: state.RecitersReducer.topReciters
 	}
 }

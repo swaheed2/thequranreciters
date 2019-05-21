@@ -7,7 +7,7 @@ import firebase from 'firebase';
 
 export function uploadReciter(details) {
 	return (dispatch) => {
-		http.post('http://rest.learncode.academy/api/johnbob/friends', { details })
+		http.post('...', { details })
 			.then(function (response) {
 				dispatch({
 					type: 'ADD_RECITER',
@@ -113,9 +113,11 @@ export function getTopReciters() {
 		firebase.ref('/analytics').orderByChild('views').limitToLast(10)
 			.once("value", (snapshot) => {
 				const topReciters = snapshot.val();
-				let top = Object.keys(topReciters).sort((a, b) => {
+				const top = Object.keys(topReciters);
+				top.sort((a, b) => {
 					return topReciters[b].views - topReciters[a].views
-				})
+				});
+				console.log('top', top);
 				dispatch({
 					type: RECITER.TOP,
 					data: top

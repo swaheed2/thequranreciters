@@ -70,7 +70,7 @@ class MyAppBar extends React.Component {
 
     componentDidMount() {
         if (window.innerWidth > 500) {
-            let div = document.getElementById('tqr-ad');
+           /*  let div = document.getElementById('tqr-ad');
             let tag = document.createElement('script');
             tag.setAttribute('async', 'true');
             tag.setAttribute('src', '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')
@@ -82,7 +82,7 @@ class MyAppBar extends React.Component {
             ins.setAttribute('data-ad-slot', '7700454601');
             div.appendChild(ins);
             // @ts-ignore
-            (window.adsbygoogle || []).push({});
+            (window.adsbygoogle || []).push({}); */
         }
     }
 
@@ -133,8 +133,8 @@ class MyAppBar extends React.Component {
                             className={`${classes.flex} ${classes.title}`}>
                             The Quran Reciters
                         </Typography>
-                        <div className={classes.tqrAd} id="tqr-ad">
-                        </div>
+                        {/* <div className={classes.tqrAd} id="tqr-ad">
+                        </div> */}
                     </Toolbar>
                 </AppBar>
             </div>
