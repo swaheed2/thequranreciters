@@ -60,7 +60,6 @@ const RecitersReducer = (state = initialState, action) => {
 
 		case TRACKS.LOADING:
 			newState.albumLoading = action.data; // album id
-			console.log('setting album loading', action.data);
 			break;
 
 		case TRACKS.UNSET_SELECTED_ALBUM:

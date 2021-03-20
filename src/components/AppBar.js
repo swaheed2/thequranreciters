@@ -49,7 +49,7 @@ class MyAppBar extends React.Component {
     constructor() {
         super();
         this.toHome = this.toHome.bind(this);
-        this.toContact = this.toContact.bind(this);
+        this.to = this.to.bind(this);
     }
 
     toHome(toggle) {
@@ -59,9 +59,9 @@ class MyAppBar extends React.Component {
         }
     }
 
-    toContact() {
-        this.props.history.push('/contact');
-        this.toggleDrawer();
+    to(route){
+        this.props.history.push(route);
+        this.toggleDrawer(); 
     }
 
     toggleDrawer(open) {
@@ -108,7 +108,17 @@ class MyAppBar extends React.Component {
                             </ListItemIcon>
                             <ListItemText primary="Reciters" />
                         </ListItem>
-                        <ListItem button onClick={this.toContact} >
+                        <ListItem button onClick={()=>{
+                            this.to('/recite');
+                        }} >
+                            <ListItemIcon>
+                                <MailIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Recite" />
+                        </ListItem>
+                        <ListItem button onClick={()=>{
+                            this.to('/contact');
+                        }} >
                             <ListItemIcon>
                                 <MailIcon />
                             </ListItemIcon>

@@ -1,3 +1,5 @@
+// @ts-check
+
 import http from 'axios'
 import * as jsonp from 'jsonp';
 import {
@@ -149,7 +151,6 @@ export function getAlbumTracks(details) {
 	const { reciterInfo, albumId, id } = details;
 
 	return (dispatch) => {
-		console.log('loading album');
 		dispatch({
 			type: TRACKS.LOADING,
 			data: albumId
@@ -167,6 +168,7 @@ export function getAlbumTracks(details) {
 					} else {
 						let tracks = [];
 						let files = data.files;
+						let hasTracksOrder = true;
 						for (var key in files) {
 							if (key.toLowerCase().indexOf('.mp3') === -1) {
 								continue;
@@ -174,6 +176,17 @@ export function getAlbumTracks(details) {
 							let track = files[key];
 							track.id = key;
 							tracks.push(track);
+							if(track.track == null){
+								hasTracksOrder = false;
+							}
+						}
+						console.log('hasTracksOrder', hasTracksOrder);
+						if(hasTracksOrder){
+							tracks.sort((a, b) =>{
+								let a1 = Number(a.track) || 0;
+								let b1 = Number(b.track) || 0;
+								return a1 > b1? 1 : (a1 < b1? -1 : 0);
+							});
 						}
 						const obj = {
 							reciter: reciterInfo,
