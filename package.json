@@ -9,7 +9,7 @@
 		"deploy": "firebase deploy --only hosting"
 	},
 	"dependencies": {
-		"axios": "^0.16.2",
+		"axios": "^0.21.1",
 		"firebase": "^4.12.1",
 		"firebase-functions": "^2.2.0",
 		"howler": "^2.0.9",
