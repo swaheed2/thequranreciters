@@ -1,7 +1,8 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import quranRecitersReducers from './reducers'
 import { reactReduxFirebase } from 'react-redux-firebase'
-import firebase from 'firebase'
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/database'
 import thunk from 'redux-thunk'
 
 const firebaseConfig = {

@@ -6,7 +6,6 @@ import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import Grid from 'material-ui/Grid';
 import GridList, { GridListTile, GridListTileBar } from 'material-ui/GridList';
-import { isLoaded, isEmpty } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Config } from '../config';
 import { getTopReciters } from '../actions';
