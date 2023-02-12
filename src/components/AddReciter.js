@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Field, FieldArray, reduxForm, formValueSelector } from "redux-form"
-import { teal } from 'material-ui/colors';
-import Button from 'material-ui/Button'
+import blue  from '@material-ui/core/colors/blue';
+import Button from '@material-ui/core/Button'
 
 class AddReciter extends Component {
 	constructor(props) {
@@ -17,12 +17,12 @@ class AddReciter extends Component {
 		return (
 			<div className="addReciter" style={{ width: '100%', marginTop: '-14px' }}>
 
-				<div style={{ backgroundColor: teal[800], minHeight: '100px', display: 'flex', justifyContent: 'center' }}>
+				<div style={{ backgroundColor: blue[800], minHeight: '100px', display: 'flex', justifyContent: 'center' }}>
 					<div style={{ margin: 'auto 0' }}>
 						<h3 style={{ color: 'white' }}>Add a Reciter</h3>
 					</div>
 				</div>
-				<div style={{ backgroundColor: teal[300] }}>
+				<div style={{ backgroundColor: blue[300] }}>
 					<form onSubmit={handleSubmit(this.submitReciter)} style={{ marginLeft: '11px', paddingTop: '11px' }}>
 						<div style={{ display: 'flex', marginBottom: '11px' }}>
 							<div style={{ width: '130px' }}><label style={{ color: 'white', marginRight: '11px' }}>Id</label></div>

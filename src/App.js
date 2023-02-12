@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Home, ReciterDetails, AddReciter } from './containers'
-import { MuiThemeProvider } from 'material-ui/styles'
+import { MuiThemeProvider } from '@material-ui/core/styles'
 import { theme } from './config'
 import { AppShell } from './components'
 import Contact from './components/Contact';

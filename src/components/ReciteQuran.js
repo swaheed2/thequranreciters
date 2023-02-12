@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
-import Button from "material-ui/Button";
+import Button from "@material-ui/core/Button";
 
 class ReciteQuran extends Component {
   start() {

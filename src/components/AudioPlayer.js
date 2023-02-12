@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui/styles';
-import Typography from 'material-ui/Typography';
-import IconButton from 'material-ui/IconButton';
-import PlayArrow from 'material-ui-icons/PlayArrow';
-import Pause from 'material-ui-icons/Pause';
+import { withStyles } from '@material-ui/styles';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import PlayArrow from '@material-ui/icons/PlayArrow';
+import Pause from '@material-ui/icons/Pause';
 import Slider from 'rc-slider/lib/Slider';
 import 'rc-slider/assets/index.css';
-import Grid from 'material-ui/Grid';
-import { grey } from 'material-ui/colors';
-import Refresh from 'material-ui-icons/Refresh';
+import Grid from '@material-ui/core//Grid';
+import grey from '@material-ui/core/colors/grey';
+import Refresh from '@material-ui/icons/Refresh';
 import { contrastText } from '../config/theme'
 
 const styles = theme => {

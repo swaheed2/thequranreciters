@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import RecitersList from './RecitersList'
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/styles';
 
 const styles = theme => ({
 })

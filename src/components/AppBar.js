@@ -1,18 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import AppBar from 'material-ui/AppBar';
-import { withStyles } from 'material-ui/styles';
-import { grey } from 'material-ui/colors';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import IconButton from 'material-ui/IconButton';
-import MenuIcon from 'material-ui-icons/Menu';
+import AppBar from '@material-ui/core/AppBar';
+import { withStyles } from '@material-ui/styles';
+import grey from '@material-ui/core/colors/grey';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from "@material-ui/icons/Menu";
 import { withRouter } from 'react-router'
-import Drawer from 'material-ui/Drawer';
-import List from 'material-ui/List';
-import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
-import MailIcon from 'material-ui-icons/Mail';
-import HomeIcon from 'material-ui-icons/Home';
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import MailIcon from '@material-ui/icons/Mail';
+import HomeIcon from '@material-ui/icons/Home';
 import { toggleDrawer } from '../actions'
 
 const styles = theme => ({
@@ -33,6 +35,7 @@ const styles = theme => ({
         cursor: 'pointer',
         textTransform: 'uppercase',
         fontSize: '16px',
+        fontWeight: "bold",
         color: theme.palette.primary.contrastText
     },
     drawerBody: {
@@ -96,7 +99,7 @@ class MyAppBar extends React.Component {
 
                 <div className={this.props.classes.drawerBody}>
                     <Typography
-                        variant="title"
+                        variant="h1"
                         onClick={() => { this.toHome(true) }}
                         className={`${classes.flex} ${classes.title}`}>
                         The Quran Reciters
@@ -138,7 +141,7 @@ class MyAppBar extends React.Component {
                             <MenuIcon />
                         </IconButton>
                         <Typography
-                            variant="title"
+                            variant="h2"
                             onClick={() => { this.toHome() }}
                             className={`${classes.flex} ${classes.title}`}>
                             The Quran Reciters

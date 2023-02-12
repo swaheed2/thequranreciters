@@ -2,7 +2,7 @@
 
 import http from "axios";
 import jsonp from "jsonp";
-import { RECITERS_IMAGES, RECITER_IMAGE, TRACKS, RECITER } from "../config";
+import { RECITERS_IMAGES, RECITER_IMAGE, TRACKS, RECITER, SHARE_DIALOG } from "../config";
 import { getDatabase, ref, onValue, set, orderByChild, query, limitToLast } from "firebase/database";
 import { getStorage, ref as storageRef, getDownloadURL } from "firebase/storage";
 
@@ -158,27 +158,20 @@ export function getAlbumTracks(details) {
                 } else {
                     let tracks = [];
                     let files = data.files;
-                    let hasTracksOrder = true;
                     for (let key in files) {
-						let extension = key.toLowerCase().substring(key.length-4);
+                        let extension = key.toLowerCase().substring(key.length - 4);
                         if ([".mp3", ".m4a"].indexOf(extension) === -1) {
                             continue;
                         }
                         let track = files[key];
                         track.id = key;
                         tracks.push(track);
-                        if (track.track == null) {
-                            hasTracksOrder = false;
-                        }
                     }
-                    console.log("hasTracksOrder", hasTracksOrder);
-                    if (hasTracksOrder) {
-                        tracks.sort((a, b) => {
-                            let a1 = Number(a.track) || 0;
-                            let b1 = Number(b.track) || 0;
-                            return a1 > b1 ? 1 : a1 < b1 ? -1 : 0;
-                        });
-                    }
+                    tracks.sort((a, b) => {
+                        let a1 = Number(a.track || 1000) || 0;
+                        let b1 = Number(b.track || 1000) || 0;
+                        return a1 > b1 ? 1 : a1 < b1 ? -1 : 0;
+                    });
                     const obj = {
                         reciter: reciterInfo,
                         tracks: tracks,
@@ -192,5 +185,14 @@ export function getAlbumTracks(details) {
                 }
             });
         }, 100);
+    };
+}
+
+export function setShareDialogTrackDetails(obj) {
+    return (dispatch) => {
+        dispatch({
+            type: SHARE_DIALOG,
+            data: obj,
+        });
     };
 }

@@ -1,6 +1,7 @@
 import {
 	RECITERS_ACTION_TYPES, RECITERS_IMAGES, RECITER_IMAGE, TRACKS,
-	RECITER
+	RECITER,
+	SHARE_DIALOG
 
 } from '../config';
 
@@ -13,7 +14,8 @@ const initialState = {
 	albumTracks: {},
 	selectedAlbum: undefined,
 	albumLoading: false,
-	viewCounts: {}
+	viewCounts: {},
+	shareDialogTrackDetails: {}
 }
 
 const RecitersReducer = (state = initialState, action) => {
@@ -21,6 +23,10 @@ const RecitersReducer = (state = initialState, action) => {
 	const newState = { ...state };
 
 	switch (action.type) {
+
+		case SHARE_DIALOG:
+			newState.shareDialogTrackDetails = action.data;
+			break;
 
 		case RECITERS_ACTION_TYPES.RECITERS_COMPLETE:
 

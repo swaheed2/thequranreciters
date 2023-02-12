@@ -1,7 +1,7 @@
 import React from 'react'
 import { AppBar } from '../components';
-import { withStyles } from 'material-ui/styles';
-import { blueGrey } from 'material-ui/colors';
+import { withStyles } from '@material-ui/styles';
+import blueGrey  from '@material-ui/core/colors/blueGrey';
 import { AudioPlayer } from '../containers';
 
 const styles = theme => ({
