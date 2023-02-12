@@ -8,6 +8,7 @@
 // To learn more about the benefits of this model, read https://goo.gl/KwvDNy.
 // This link also includes instructions on opting out of this behavior.
 
+
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
     // [::1] is the IPv6 localhost address.
@@ -47,6 +48,17 @@ function registerValidSW(swUrl) {
   navigator.serviceWorker
     .register(swUrl)
     .then(registration => {
+
+
+      // Check for updates at start.
+      registration.update();
+      // Check for updates every 5 min.
+      setInterval(() => {
+        registration.update();
+        console.debug("Checked for update...");
+      }, (1000 * 60) * 5);
+
+
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
         installingWorker.onstatechange = () => {
@@ -57,6 +69,7 @@ function registerValidSW(swUrl) {
               // It's the perfect time to display a "New content is
               // available; please refresh." message in your web app.
               console.log('New content is available; please refresh.');
+
             } else {
               // At this point, everything has been precached.
               // It's the perfect time to display a
